@@ -13,8 +13,8 @@ class Lumoney:
             self.pwd = un_pwd[1]
             print(self.username, self.pwd)
         # self.driver = webdriver.PhantomJS(executable_path='/Users/jason/logs/phantomjs')
-        self.driver = webdriver.Firefox(executable_path='/Users/jason/logs/geckodriver')
-        self.username = str
+        # self.driver = webdriver.Firefox(executable_path='/Users/jason/logs/geckodriver')
+        self.driver = webdriver.Chrome(executable_path='/Users/jason/logs/chromedriver')
 
     def login(self):
         driver = self.driver
@@ -38,4 +38,4 @@ class Lumoney:
 if __name__ == '__main__':
 
     transfer = Lumoney()
-    # transfer.login()
+    transfer.login()
