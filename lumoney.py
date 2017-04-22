@@ -8,7 +8,8 @@ import json
 import pickle
 
 HEADERS = {'ContentType': 'application/json; charset=UTF-8',
-           'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'}
+           'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3)'
+                         ' AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'}
 
 qr_code = 'qr_code.jpg'
 
@@ -32,14 +33,15 @@ class LumoneyP2pTransfer:
             self.session.cookies = cookie_jar
         else:
             with open('cookies.json', 'rb') as f:
-                cookis_str = f.read().decode()
-                cookies = json.loads(cookis_str)
+                cookies_str = f.read().decode()
+                cookies = json.loads(cookies_str)
             for cookie in cookies:
                 self.session.cookies.set(name=cookie['name'], value=cookie['value'])
 
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(self.session.cookies)
 
+        # 在这个地方写出自己的账号密码
         path = '../p.av'
         with open(path, 'rb') as f:
             strr = f.read().decode()
@@ -48,10 +50,8 @@ class LumoneyP2pTransfer:
             self.pwd = un_pwd[1]
             self.pwd_encode = un_pwd[2]
 
-        print(self.username, self.pwd)
-
     def login(self):
-        print('logging')
+        print('logging…………')
 
         def try_login():
             url = 'https://user.lu.com/user/login'
@@ -69,7 +69,6 @@ class LumoneyP2pTransfer:
                 'loginagree': "on"
             }
             r = self.session.post(url, data=data)
-            print(r.cookies)
             dic = r.json()
             if dic['resultId'] == '00':
                 self.is_login = True
@@ -79,8 +78,8 @@ class LumoneyP2pTransfer:
             else:
                 return False
 
-            redirect_url = dic['redirectPath']
-            return redirect_url
+            redirect_path = dic['redirectPath']
+            return redirect_path
 
         # get_code()
         #
@@ -155,13 +154,9 @@ class LumoneyP2pTransfer:
 
 # helpers
     def save_cookies(self):
-        cookiesJar = self.session.cookies
-        # if self.debug:
-            # print(cookiesJar)
-        dic = requests.utils.dict_from_cookiejar(cookiesJar)
-        print(dic)
+        cookies_jar = self.session.cookies
         with open(cookie_file, 'wb') as f:
-            pickle.dump(cookiesJar, f, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(cookies_jar, f, pickle.HIGHEST_PROTOCOL)
 
     def get_cookies(self):
         with open(cookie_file, 'rb') as f:
@@ -209,6 +204,7 @@ class LumoneyP2pTransfer:
             f.write(r.content)
             self._safe_open(qr_code)
 
+    # 测试是否需要登录，如果需要登录则调用login
     def test_login(self):
         r = self.session.get('https://my.lu.com/my/account')
         if self.debug:
@@ -235,12 +231,10 @@ class LumoneyP2pTransfer:
 if __name__ == '__main__':
     transfer = LumoneyP2pTransfer()
 
-    redirect_url = transfer.login()
+    # redirect_url = transfer.login()
     # if transfer.debug:
         # r = transfer.session.get('https://my.lu.com/my/user-ms')
         # print(r.content.decode())
-
-
-    # transfer.sync_data()
+    transfer.sync_data()
 
 
