@@ -27,10 +27,19 @@ class Lumoney:
         input_password = driver.find_element_by_id('pwd')
         input_password.send_keys(self.pwd)
 
+        print('input code:')
+        vericode = input()
+        input_capcha = driver.find_element_by_id('validNum')
+        input_capcha.send_keys(vericode)
+
         login = driver.find_element_by_id('loginBtn')
         login.send_keys(Keys.ENTER)
-        login_cookie = driver.get_cookies()
-        print(login_cookie)
+
+        login_cookies = driver.get_cookies()
+        print(login_cookies)
+        print(driver.get_cookie('Hm_lpvt_9842c7dcbbff3109ea37b7407dd0e95c'))
+        for cookie in login_cookies:
+            print(type(cookie))
 
 
 
