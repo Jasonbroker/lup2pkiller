@@ -17,6 +17,8 @@ cookie_file = 'cookies.log'
 
 base_url = 'https://list.lu.com'
 
+buy_base_url = 'https://list.lu.com/list'
+
 p2p_url = 'https://list.lu.com/list/transfer-p2p'
 
 test_login_url = 'https://my.lu.com/my/account'
@@ -25,8 +27,10 @@ test_login_url = 'https://my.lu.com/my/account'
 class LumoneyP2pTransfer:
     def __init__(self):
         self.session = requests.session()
-        self.is_login = False
+        self.is_login = True
         self.debug = True
+        self.last_productId = ''
+        self.product_id_cache = {}
 
         cookie_jar = self.get_cookies()
         if cookie_jar:
@@ -97,29 +101,53 @@ class LumoneyP2pTransfer:
 
     # return a list of suibable product id
     def check_suitable_productId(self):
-        print('syncing')
         r = self.session.get(p2p_url, headers=HEADERS)
         if r.status_code != 200:
             return None
         soup = BeautifulSoup(r.content, "lxml")
         samples = soup.find_all("li", class_="product-list")
-        url = self.select_product(samples, 20000)
+        url = self.select_product(samples, 10000)
         return url
 
     def buy_with_url(self, url):
         buy_url = base_url + url
-        if self.debug:
-            print('will buy product')
-            self._safe_open(buy_url)
-        if not self.is_login:
-            self.login()
-        r = self.session.get(buy_url, headers=HEADERS)
-        print(r.content.decode('utf-8'))
+        product_id = url.split('=')[1]
+        can_buy = False
+        if self.last_productId == product_id:
+            if self.debug:
+                print('same id ')
+        else:
+            # if self.debug:
+            #     print('will buy product')
+            #     self._safe_open(buy_url)
+            self.last_productId = product_id
+            if not self.is_login:
+                self.login()
+            # r = self.session.get(buy_url, headers=HEADERS)
+            # print(product_id)
+            # self.get_product_detail(product_id)
 
+            # print(detail.content)
+            # print(r.content.decode('utf-8'))
+            can_buy = self.invest_check(product_id, 0)
+
+        if can_buy:
+            print('go a head')
+        else:
+            self.sync_data()
 
     def select_product(self, product_list, max_price):
         selected_url = None
-        for product in product_list:
+        for product in product_list[:-1]:
+            url = product.find('a', class_='ld-btn').get('href')
+            if self.product_id_cache.get(url):
+                print('same url')
+                if len(self.product_id_cache) > 20:
+                    self.product_id_cache.clear()
+                continue
+            else:
+                self.product_id_cache[url] = url
+
             interest = product.find('p', class_='num-style').string
             time_remaining = product.find('li', class_='invest-period').find('p').string
             discount = product.find('b', class_='num-style').string
@@ -130,20 +158,53 @@ class LumoneyP2pTransfer:
             if float(price.strip().replace(',', '')) > max_price:
                 continue
 
-            url = product.find('a', class_='ld-btn').get('href')
             selected_url = url
             print('已选择最优方案:', interest, price, discount, time_remaining, url)
             break
         return selected_url
 
+    def get_product_detail(self, product_id):
+        url = 'https://trading.lu.com/trading/trade-info'
+        dic = {'productId': product_id}
+        r = self.session.get(url, params=dic)
+
+        print('detail:\n')
+        print(r.text)
+        if self.debug:
+            print('will buy product')
+            self._safe_open(url)
+
+    def invest_check(self, product_id, amount):
+
+        '''productId: 145796624
+        investAmount: 8000.78
+        investSource: 0
+        isCheckSQ: 1
+        '''
+        dic = {
+            'productId': product_id,
+            'investAmount': amount,
+            'investSource': 0,
+            'isCheckSQ': 1,
+        }
+        api = buy_base_url + '/itrading/invest-check'
+        r = self.session.post(api, data=dic)
+        print(r.content.decode())
+        result = r.json()
+        if self.debug:
+            print('cost: %f' % time.time())
+            print(result)
+        code = result['res_code']
+        return code == '0'
+
 
     def sync_data(self):
 
         while True:
+            print('syncing at %f' % time.time())
             url = self.check_suitable_productId()
             # url 不存在说明没有数据，继续
             if not url:
-                time.sleep(0.5)
                 continue
             result = self.buy_with_url(url)
             if result:
@@ -220,7 +281,7 @@ class LumoneyP2pTransfer:
         soup = BeautifulSoup(data, 'lxml')
         samples = soup.find_all("li", class_="product-list")
         print(samples[0])
-        url = self.select_product(samples, 20000)
+        url = self.select_product(samples, 10000)
 
         # url 不存在说明没有数据，继续
         if not url:
