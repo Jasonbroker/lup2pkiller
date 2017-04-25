@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>安全验证-投资-平安陆金所</title>
+    <meta name="keywords" content="$keywords">
+    <meta name="description" content=$description>
+    <meta name="WT.pn_sku" content="投资">
+    <meta name="WT.page_name" content="确认投资">
+
+
+    <link rel="shortcut icon" href="//static.lufaxcdn.com/config/images/favicon-new.ico" />
+<link type="text/css" rel="stylesheet" href="//static.lufaxcdn.com/lufax-public/base/base.25a6f23a.css"/>
+    <link rel="stylesheet" href="//static.lufaxcdn.com/lufax-components/lufax-components.d2f7d012.css">
+    <link type="text/css" rel="stylesheet" href="//static.lufaxcdn.com/lufax-public/lufax-public/lufax-public.5ba24e42.css"/>
+<link type="text/css" rel="stylesheet" href="//static.lufaxcdn.com/lufax-public/lufax-lib/lufax-lib.717f0a66.css"/>
+
+            <link rel="stylesheet" type="text/css" href="https://static.lufaxcdn.com/trading/resource/module/investment_new.f35fb839.css">
+            <link rel="stylesheet" type="text/css" href="https://static.lufaxcdn.com/trading/resource/module/step-cm.dc48afed.css">
+            <link rel="stylesheet" type="text/css" href="https://static.lufaxcdn.com/trading/resource/module/popBankSelect.7f4fa95d.css">
+
+    <script type="text/javascript">document.domain = 'lu.com';</script>
+</head>
+<body>
+<input type="hidden" id="userId" name="userId" value="30100743"/>
+<input type="hidden" id="staticPath" name="staticPath" value="https://static.lufaxcdn.com"/>
+<input type="hidden" id="listUrl" name="listUrl" value="https://list.lu.com/list"/>
+<input type="hidden" id="myUrl" name="myUrl" value="https://my.lu.com/my"/>
+<input type="hidden" id="userUrl" name="userUrl" value="https://user.lu.com/user"/>
+<input type="hidden" id="yebUrl" name="yebUrl" value="https://ljbao.lu.com/yeb"/>
+<input type="hidden" id="cashierUrl" name="cashierUrl" value="https://cashier.lu.com/cashier"/>
+<input type="hidden" id="lumiUrl" name="lumiUrl" value="https://lumi.lu.com/lumi"/>
+<input type="hidden" id="rsaPublicKey" name="rsaPublicKey" value="BE24E372DC1B329633A6A014A7C02797915E3C363DD6EE119377BD645329B7E6446B4A71AC5F878EBC870C6D8BFD3C06B92E6C6E93390B34192A7A9E430800091761473FAC2CC0A68A828B2589A8CB729C19161E8E27F4C0F3CDE9701FAFE48D2B65947799072AFA6A3F2D7BDBEF8B6D7429C2D115A3E5F723467D57B3AC6967"/>
+<input type="hidden" id="lufaxPoint" name="lufaxPoint" value="积分"/>
+<input type="hidden" id="fromDomain" name="fromDomain" value="" />
+<input id="lboProductNameConfigure" type="hidden" value="零活宝T+0" />
+
+    <div class="lufax-header header-simple" id="lufax-header">
+    <div class="top-wrap">
+        <div class="top-body clearfix">
+            <ul class="top-login-status clearfix top-login hidden" id="top-login">
+                <li id="header-login-home-icon" class="home-icon"><a href="//www.lu.com/"></a></li>
+                <li>您好，<a href="//my.lu.com/my/account" class="user-name"></a>
+                    <span class="msg-tips">
+                        <a class="my-account my-msg" id="my-account" href="//my.lu.com/my/user-msg" target="_blank">
+                            <i class="icon-msg"></i>
+                            <span id="header-my-account" data-sk="头部-消息">消息</span>
+                            <span id="header-my-msg-panel" class="msg-wrap hidden"> <span id="msg-count"></span> </span>
+                        </a>
+                        <p class="kyc-invest-tips hidden">
+                            <i class="tips-arrow"></i>
+                            您有投资项目已完成电话确认。<a href="//my.lu.com/my/user-msg" target="_blank" data-sk="InvestContinue">立即查看 </a>
+                            <i class="tips-close"></i>
+                        </p>
+                    </span>
+                    <span class="safe-logout-wrap">| <a href="//user.lu.com/user/logout" id="safe-logout">安全退出</a></span>
+                </li>
+            </ul>
+            <ul class="top-login-status clearfix top-cookie hidden" id="top-cookie">
+                <li id="header-cookie-home-icon" class="home-icon"><a href="//www.lu.com/"></a></li>
+                <li class="top-cookie">您好，<a id="header-cookie-name" href="//user.lu.com/user/login" class="cookie-name" data-sk="头部-用户名"></a> [<a id="header-cookie-login" href="//user.lu.com/user/login?returnPostURL=http%3A%2F%2Fwww.lu.com%2F" class="gray-word" data-sk="头部-登录">登录</a>] [<a id="header-cookie-register" href="//user.lu.com/user/register" class="gray-word" data-sk="头部-免费注册">免费注册</a>]</li>
+            </ul>
+            <ul class="top-login-status clearfix top-noLog hidden" id="top-noLog">
+                <li id="header-nolog-home-icon" class="home-icon"><a href="//www.lu.com/"></a></li>
+                <li class="top-noLog">您好，欢迎来到陆金所！ [<a id="header-nolog-login" class="gray-word" href="//user.lu.com/user/login?returnPostURL=http%3A%2F%2Fwww.lu.com%2F"  data-sk="头部-登录">登录</a>] [<a id="header-nolog-register" class="gray-word" href="//user.lu.com/user/register" data-sk="头部-免费注册">免费注册</a>]</li>
+            </ul>
+            <ul class="media-link clearfix">
+                <li>
+                    <a href="//my.lu.com/my/account" target="_blank" data-sk="头部-我的账户">我的账户</a>
+                </li>
+                <li class="lumi-link"><a id="header-lumi" href="//lumi.lu.com/lumi/index" target="_blank"  data-sk="陆米-陆金所通用头部-陆米世界入口">会员俱乐部</a><!--<i class="icon-ani-new">&nbsp;</i>--></li>
+                <li class="lumi-link"><a id="header-vip" href="//vip.lu.com/vip" target="_blank"  data-sk="头部-VIP非凡会">VIP非凡会</a></li>
+                <li><a id="header-luzixun" href="http://www.lzx-hw.com/" target="_blank"  data-sk="头部-陆金所咨询">陆金所咨询</a></li>
+                <!--<li><a id="header-chongjinsuo" href="//list.lu.com/list/chongjinsuo" target="_blank"  data-sk="头部-重金所">重金所</a></li>-->
+                <!--<li><a id="header-qianjiaosuo" href="//list.lu.com/list/qianjiaosuo" target="_blank"  data-sk="头部-前交所">前交所</a></li>-->
+                <li><a id="header-help-center" href="//www.lu.com/help/" target="_blank"  data-sk="头部-帮助中心">帮助中心</a></li>
+                <li><a href="http://www.10100000.com/daikuan/lfx-index.html?utm_source=LFXHK011-LUFAX-pc&utm_medium=CPS&utm_campaign=FILTER2.1&WT.mc_id=CXX-WXDLUFAXHK-011-pc-LFX-3in1&" target="_blank"  data-sk="头部-借款">借款</a></li>
+                <li><a href="http://www.zhong.com" target="_blank"  data-sk="头部-重筹">众筹</a></li>
+                <li class="ljf_nav"><a href="//www.lup2p.com/lup2p/" target="_blank"  data-sk="头部-陆金服">陆金服
+                    <b class="lup2pnav-down-arrow"></b></a>
+                    <ul>
+                        <li><a href="https://qhzx.pingan.com.cn/cust/rmgs/jigou/jg-index.html" target="_blank"  data-sk="头部-p2p合作">p2p合作</a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="header-mobile-panel" class="mobile-link"><a id="header-mobile" href="//www.lu.com/activity/app201307/index.html" target="_blank"><i class="icon-mobile"></i>手机版</a></li>
+                <li id="header-weibo-panel" class="weibo-link"><a id="header-weibo" href="http://e.weibo.com/lufax" target="_blank"><i id="header-weibo-icon" class="icon-weibo"></i></a></li>
+                <li id="header-weixin-panel" class="weixin">
+                    <a id="header-weixin" href="javascript:void(0);"><i id="header-weixin-icon" class="icon-weixin"></i></a>
+                    <p><b></b><span class="lufax-code weixin-code"></span></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="head-body-wrap">
+        <div class="head-body simple-head-body clearfix">
+
+            <div id="header-body-logo-panel" class="logo lu-logo-temp">			<a href="//www.lu.com/">
+					<img src="https://static.lufaxcdn.com/wcm-images/UcuCOdQ4bJE5qGwNvDRIBA.jpg" alt=""/>
+		</a>
+</div>
+
+            <div id="header-body-slogan-panel" class="slogan">				<img src="https://static.lufaxcdn.com/wcm-images/Pu40SMbLYuUshPdIniOwsQ.png" alt=""/>
+	</div>
+        </div>
+    </div>
+</div>
+
+<script type="text/template" id="lumi-link-logo-tpl">
+    <div class="lumi-link-logo">
+        <span class="head-logo-wlt"><img src="//static.lufaxcdn.com/lufax-components/img/head-logo-wlt.cdcd6208.png" alt="" /></span>
+        <p class="lumi-logo-tips"><i></i>本站由万里通提供技术支持</p>
+    </div>
+</script>
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="https://static.lufaxcdn.com/config/css/pa_ui.css">
+<input type="hidden" id="current-page" value="investment"/>
+<input type="hidden" name="productId" id="sourceType" value="9"/>
+<input type="hidden" name="productId" id="productType" value="TRANSFER_REQUEST"/>
+<input type="hidden" name="productId" id="productCategory" value="901"/>
+
+<input type="hidden" name="productId" id="coinSize" value="0"/>
+<input type="hidden" name="productId" id="totalAmount" value="7253.38"/>
+
+<input type="hidden" name="productCoinSwitch" id="productCoinSwitch" value=""/>
+<input type="hidden" name="maxCoinUseAmount" id="maxCoinUseAmount" value="0"/>
+
+<input type="hidden" name="balanceAmount" id="balanceAmount" value="0"/>
+<input type="hidden" name="paymentMethod" id="paymentMethod" value="6"/>
+<input type="hidden" name="supportPayMethods" id="supportPayMethods" value="6">
+<input type="hidden" name="ifSetPassword" id="ifSetPassword" value="1"/>
+
+<input type="hidden" name="luWalletTotalAmount" id="luWalletTotalAmount" value="">
+<input type="hidden" name="luWalletLimitAmount" id="luWalletLimitAmount" value="">
+
+<input type="hidden" id="yebTotalAmount" value="10002">
+<input type="hidden" id="yebLimitAmount" value="5000000">
+<input type="hidden" id="yebCanPay" value="10002">
+
+<div class="main-wrap">
+
+<ul class="stepWrap clearfix ">
+    <li class="steps finish">
+                    <div class="stepContent"><p class="stepTitle">确认信息</p><p class="stepNum">1</p></div>
+                <p class="progressLine">&nbsp;</p>
+    </li>
+
+            <li class="steps finish">
+            <div class="stepContent"><p class="stepTitle"> 确认合同</p><p class="stepNum">2</p></div>
+            <p class="progressLine">&nbsp;</p>
+        </li>
+        <li class="steps active">
+            <div class="stepContent"><p class="stepTitle">支付确认</p><p class="stepNum">3</p></div>
+            <p class="progressLine">&nbsp;</p>
+        </li>
+        <li class="steps lastChild ">
+            <div class="stepContent"><p class="stepTitle">完成</p><p class="stepNum">4</p></div>
+        </li>
+    </ul>
+            <div class="tab-body">
+        <div class="pay">
+                                                                <div class="lucoin_wrap">
+            <div class="lucoin_list lucoinList-hidden">
+        <div class="tit">
+                            <a href="http://www.lu.com/help/help_issue_freshman_answer_34.html" target="_blank">了解使用详情</a>
+                        <span class="tab_lucoin ">
+                                                                        <i class=""></i>
+                                                            使用投资券抵扣
+             </span>
+
+                    </div>
+
+        <div class="lucoin_status hidden ">
+                                        <dl class="list_main">
+                    <dt>
+                        <span class="coupon">投资券</span>
+                        <span class="rule">使用规则</span>
+                        <span class="validity">到期时间</span>
+                    </dt>
+                </dl>
+                <div class="no_lucoin">
+                    <i class="iconV2 prompt-icon"></i>您当前没有可使用的投资券
+                </div>
+                    </div>
+
+    </div>
+    <input type="hidden" id="avaliableCanUse" value="">
+            <div class="count">
+        实付总额： <strong id="payAmount" class="payment payAmount">7,253.38</strong> 元
+                    <span class="count-explain lucoinList-hidden ">
+                    （ 投资金额：
+                                    <strong id="total">7,253.38</strong> 元
+                        – 抵扣金额：<strong class="avaliableAmount">0.00</strong> 元）
+                            </span>
+            </div>
+</div>
+
+<div id="yebPayContent">
+<div class="payment-wrapper ">
+    <div class="payment-balance">
+        <div class="payment-amount">
+            <p class="payment-balance-lack ">
+                <span class="trading-sprite icon-error"></span>
+                余额不足，请先
+                <a href="https://cashier.lu.com/cashier/recharge?amount=-2748.62&productId=145855546" target="_blank">充值</a>
+            </p>
+            <p class="payment-balance-enough is-show ">
+                支付： <span class="num-style" id="balance-pay">
+                                    0.00
+                                </span> 元
+            </p>
+        </div>
+        <p>
+            账户余额支付（余额：
+            <span class="num-style">0.00</span>
+            元）
+        </p>
+    </div>
+</div>
+<div class="payment-yeb-wrapper">
+    <div class="payment-yeb is-show ">
+        <div class="payment-amount">
+                            <p class="payment-yeb-enough">
+                    <span >支付：
+                        <span class="num-style yeb-actual-pay">7,253.38</span> 元
+                    </span>
+                </p>
+                    </div>
+        <p class="payment-yeb-left ">
+            <span>零活宝T+0支付</span>
+            <i title="<p>1.用户同意授权委托陆金所传递货币基金份额的赎回指令，赎回款项将用于投资；</p>
+                  <p>2.用户发起申请之日起, 不再享受货币基金份额投资收益；</p>
+                  <p>3.若投资项目无法成立， 相应投资金额返还用户的陆金所账户；</p>
+                  <p>4.用户发起的申请可能因基金公司限额等原因无法完成，具体请点击确认栏[下]方查阅《授权书》全文。</p>
+                  <p>*“零活宝T+0支付”名称仅系为方便用户理解之目的参考, 不代表陆金所向用户直接提供支付服务, 具体服务内容以相关交易文件和规则为准。</p>" class="yeb-exp"></i>
+            （金额：
+            <span class="num-style">10,002.00</span> 元）
+            <span class="payment-limit">
+                限额:5,000,000.00元/日
+            </span>
+        </p>
+    </div>
+</div>
+</div>
+<textarea id="yebPayTemp" class="hidden">
+<div class="payment-wrapper {if !(model.balanceCanPay)} payment-gray {/if}">
+    <div class="payment-balance">
+        <div class="payment-amount">
+            <p class="payment-balance-lack {if !(model.balanceCanPay)} is-show {/if}">
+                <span class="trading-sprite icon-error"></span>
+                余额不足，请先
+                <a href="${model.cashierUrl}/recharge?amount=${model.needRechargeAmount}&productId=${model.productId}" target="_blank">充值</a>
+            </p>
+            <p class="payment-balance-enough {if model.balanceCanPay} is-show {/if}">
+                支付： <span class="num-style" id="balance-pay">
+                {if model.rechargeAmount > 0 }
+                    ${model.balanceAmountDisplay}
+                {else}
+                    ${model.totalAmountDisplay}
+                {/if}
+            </span> 元
+            </p>
+        </div>
+        <p>
+            账户余额支付（余额：
+            <span class="num-style">${model.balanceAmountDisplay}</span>
+            元）
+        </p>
+    </div>
+</div>
+{if model.payMethods == "yebOnly" }
+    <div class="payment-yeb-wrapper">
+        <div class="payment-yeb is-show">
+            <div class="payment-amount">
+                {if model.rechargeAmount > model.yebTotalAmount }
+                <p class="payment-yeb-lack is-show">
+                    <span class="no-enough-hint">金额不足</span>
+                </p>
+                {elseif model.rechargeAmount > model.yebLimitAmount }
+                <p class="payment-yeb-lack is-show">
+                    <span class="no-enough-hint">支付额度超限</span>
+                </p>
+                {else}
+                {var yebIsEnough = true }
+                <p class="payment-yeb-enough">
+                    <span >支付：
+                        <span class="num-style yeb-actual-pay">${model.rechargeAmountDisplay}</span> 元
+                    </span>
+                </p>
+                {/if}
+            </div>
+            <p class="payment-yeb-left {if !yebIsEnough } payment-gray {/if}">
+                ${model.yebInfo}
+            </p>
+        </div>
+    </div>
+{elseif model.payMethods == "yebAndBank"}
+    {if model.yebCanPay >= model.rechargeAmount }
+    <div class="payment-yeb-bank-wrapper">
+        <div class="payment-yeb is-show">
+            <div class="payment-amount">
+                <p class="payment-yeb-enough {if model.paymentMethod != '6'} is-hidden {/if}">
+                    <span >
+                        支付： <span class="num-style yeb-actual-pay">${model.rechargeAmountDisplay}</span> 元
+                    </span>
+                </p>
+            </div>
+            <input type="radio" name="yeb-bank-check" {if model.paymentMethod == '6'} checked="checked" {/if} data-payment="6"  data-sk="chooseLjbPay"/>
+            <p class="payment-diplay-block">
+                ${model.yebInfo}
+            </p>
+        </div>
+        <div class="payment-bank is-show">
+            <div class="payment-amount">
+                <p class="{if model.paymentMethod != '2'} is-hidden {/if}">
+                    支付：
+                    <span class="num-style" id="bank-pay">${model.rechargeAmountDisplay}</span>
+                    元
+                </p>
+                <p class="{if model.paymentMethod != '2'} is-hidden {/if}">
+                    <span class="payment-warn">请确保银行卡余额足够</span>
+                </p>
+            </div>
+            <input type="radio" name="yeb-bank-check" {if model.paymentMethod == '2'} checked="checked" {/if} data-payment="2"/>
+            <p class="payment-diplay-block">
+                ${model.bankInfo}
+            </p>
+
+        </div>
+    </div>
+    {else}
+    <div class="payment-yeb-bank-wrapper">
+        <div class="payment-yeb is-show">
+            <div class="payment-amount">
+                {if model.yebCanPay == 0}
+                    <div class="payment-amount">
+                        {if model.yebTotalAmount == 0}
+                            <p class="payment-yeb-lack is-show">
+                                <span class="no-enough-hint">金额不足</span>
+                            </p>
+                        {elseif  model.yebLimitAmount == 0}
+                            <p class="payment-yeb-lack is-show">
+                                <span class="no-enough-hint">支付额度超限</span>
+                            </p>
+                        {/if}
+                    </div>
+                {else}
+                    <p class="payment-yeb-enough {if model.paymentMethod != '8'} is-hidden {/if}">
+                        <span >
+                            支付： <span class="num-style yeb-actual-pay">${model.yebCanPayDisplay}</span> 元
+                        </span>
+                    </p>
+                 {/if}
+            </div>
+            {if model.yebCanPay != 0}
+                <input type="checkbox" name="yeb-bank-check" {if model.paymentMethod == '8'} checked="checked" {/if}  data-sk="useLjbPay"/>
+            {/if}
+            <p class="payment-diplay-block {if model.yebCanPay == 0} payment-gray {/if}">
+                ${model.yebInfo}
+            </p>
+        </div>
+        <div class="payment-bank is-show">
+            <div class="payment-amount">
+                <p>
+                    支付：
+                    <span class="num-style" id="bank-pay">
+                        {if model.paymentMethod == "8"}
+                            ${model.needBankPayDisplay}
+                        {else}
+                            ${model.rechargeAmountDisplay}
+                        {/if}
+
+                    </span>
+                    元
+                </p>
+                <p>
+                    <span class="payment-warn">请确保银行卡余额足够</span>
+                </p>
+            </div>
+
+            <p class="payment-diplay-block">
+                ${model.bankInfo}
+            </p>
+        </div>
+    </div>
+    {/if}
+{/if}
+
+</textarea>
+<div id="yebPayInfo" class="hidden">
+    <span>零活宝T+0支付</span>
+    <i title="<p>1.用户同意授权委托陆金所传递货币基金份额的赎回指令，赎回款项将用于投资；</p>
+                  <p>2.用户发起申请之日起, 不再享受货币基金份额投资收益；</p>
+                  <p>3.若投资项目无法成立， 相应投资金额返还用户的陆金所账户；</p>
+                  <p>4.用户发起的申请可能因基金公司限额等原因无法完成，具体请点击确认栏[下]方查阅《授权书》全文。</p>
+                  <p>*“零活宝T+0支付”名称仅系为方便用户理解之目的参考, 不代表陆金所向用户直接提供支付服务, 具体服务内容以相关交易文件和规则为准。</p>" class="yeb-exp"></i>
+    （金额：
+    <span class="num-style">10,002.00</span> 元）
+    <span class="payment-limit">
+        限额:5,000,000.00元/日
+    </span>
+</div>
+                                    </div>
+            </div>
+    <div id="password-container">
+                <div class="securityValid_box">
+    <div class="securityValid">
+        <form class="form-horizontal">
+            <div class="control-group tradeCodeWrap">
+                <label class="control-label" for="tradeCode">交易密码：</label>
+
+                <div class="controls">
+                        <span class="input-wrap">
+                            <input type="password" id="tradeCode" placeholder="" tabindex="5"
+                                   class="inputs input-medium tradeCode analyze-tradeCode" data-label="交易密码"/>
+                        </span>
+                    <a href="https://user.lu.com/user/find-trade-password" class="findPwd" target="_blank">忘记密码？</a>
+                        <span class="errorPanel hidden">
+                            <b class="arrow left"> </b>
+                            <span class="errorContent"></span>
+                        </span>
+                    <span class="help-line hidden" id="pwd-tip">交易密码不等于登录密码和银行卡密码</span>
+                </div>
+                <div id="kb"></div>
+
+            </div>
+                                                        <div class="control-group validNumWrap">
+                        <label class="control-label" for="inputValid">验证码：</label>
+
+                        <div class="controls">
+                            <span class="input-wrap">
+                            <input type="text" id="inputValid" placeholder="" tabindex="6" class="inputs input-small inputValid"
+                                   maxlength="4" name="inputValid" data-label="验证码"/>
+                                <i class="icon validIcon" id="captchaIcon"></i>
+                                </span>
+
+                            <img alt="" src="" data-resource-uri="https://user.lu.com/user/captcha/get-captcha?source=1"
+                                 data-image-id="" class="validNum">
+                            <a class="changeValidNum" href="javascript:void(0)">换一张</a>
+                            <span class="errorPanel hidden">
+                                <b class="arrow left"> </b>
+                                <span class="errorContent"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                                                                                                <p class="payment-bank-accept yeb-bank-accept " id="payment-yeb-check-container">
+                    <input type="checkbox" id="payment-yeb-check" checked/><span for="payment-yeb-check ">我已阅读并同意
+                        <span class="hidden" id="payment-yebBank-check">
+                            《<a class="link-contract" href="javascript:void(0);">充值代扣委托书通用版</a>》
+                        </span>
+                        《<a href="//promo.lu.com/activity-pages/yeb-contract/yeb-contract.html" target="_blank">授权书</a>》
+                    </span>
+                </p>
+                        <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <a class="btns btn_large validBtn" data-sk="payment_145855546" id="validBtn" href="javascript:void(0)"> 提交并支付 </a>
+                    <span class="errorPanel hidden">
+                        <span class="errorContent"></span>
+                    </span>
+                                </div>
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+
+            <form id="result" action="result-info?from=" method="post">
+            <input type="hidden" id="productId" name="productId" value="145855546"/>
+        <input type="hidden" name="sid" id="sid" value="278205369"/>
+        <input type="hidden" id="uid" name="uid" value="30100743"/>
+        <input id="resultCode" type="hidden" name="resultCode"/>
+        <input id="investmentRequestId" type="hidden" name="investmentRequestId"/>
+        <input id="trxId" type=hidden name="trxId"/>
+        <input id="rechargeAmount" type="hidden" name="rechargeAmount"/>
+        <input id="riskLevelDesc" type="hidden" name="riskLevelDesc"/>
+        <input id="productRiskLevelDesc" type="hidden" name="productRiskLevelDesc"/>
+        <input id="needWithholding" type="hidden" name="needWithholding"/>
+        <input id="withholdingAmount" type="hidden" name="withholdingAmount"/>
+        <input type="hidden" name="isInvestWalletBefore" id="isInvestWalletBefore" value=""/>
+        <input type="hidden" name="paymentMethod"  value="1" />
+        <input type="hidden" name="applyPolicyNoString" value=""/>
+        <input type="hidden" name="insuranceType" value=""/>
+        <input id="targetProductId" type="hidden" name="targetProductId" value=""/>
+        <input id="buyType" name="buyType" type="hidden" value="">
+    </form>
+    <form id="recharge-contract" method="post" target="_blank" action="https://cashier.lu.com/cashier/recharge/showContract">
+        <input id=amountInContract type="hidden" name="amount" value="7253.38"/>
+        <input name="username" type="hidden" value=""/>
+        <input name="bankAccount" type="hidden" value=""/>
+        <input name="actualname" type="hidden" value=""/>
+        <input name="idOnly" type="hidden" value=""/>
+        <input name="idType" type="hidden" value=""/>
+        <input type="hidden" id="bankCodeName" name="bankCodeName" value="">
+        <input id="recharge-date" type="hidden" name="rechargeDate" value="">
+    </form>
+    <script type="text/javascript" src="https://static.lufaxcdn.com/user/js/base/unionrsa.js"></script>
+</div>
+
+    <div id="lufax-footer" class="lufax-footer simple-foot clearfix">
+    <div class="footer clearfix">
+        <div class="contactbox">
+            <i></i>
+            <p class="call-message">
+                <a href="//common.lu.com/common/cs/chat" target="_blank" class="call-online-service" data-sk="onlineCustmer_homePage">24小时在线客服</a>
+            </p>
+        </div>
+        <p class="wechat">				<img src="https://static.lufaxcdn.com/wcm-images/yKs_gAqvG4-HDoclSGvfrw.jpg" alt=""/>
+	</p>
+        <p id="footer-copyright" class="copyright">
+            版权所有 © 上海陆家嘴国际金融资产交易市场股份有限公司未经许可不得复制、转载或摘编，违者必究!
+            <br>
+            Copyright Shanghai Lujiazui International Financial Asset Exchange Co.,LTD. ALL Rights Reserved
+            <br>
+            沪 ICP 证 B2-20120023号   沪 ICP 备 12032241 号-7 &nbsp;&nbsp;<a id="footer-icp" href="https://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&entyId=dov73ne26zbqq0ildti0q39gru6x2zu3va" target="_blank">联系信息详情请点击</a>
+        </p>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var Global = {};
+    Global.basePath = "/trading/";
+</script>
+    <script type="text/javascript" src="//static.lufaxcdn.com/lufax-public/jquery/jquery.8f23e923.js"></script>
+    <script type="text/javascript" src="//static.lufaxcdn.com/lufax-components/lufax-components.ed02526c.js"></script>
+    <script type="text/javascript" src="//static.lufaxcdn.com/lufax-public/lufax-lib/lufax-lib.ea71b88b.js"></script>
+<script type="text/javascript" src="//static.lufaxcdn.com/lufax-public/lufax-public/lufax-public.206f2383.js"></script>
+
+    <script type="text/javascript" src="https://static.lufaxcdn.com/trading/resource/require/require_config.ca719220.js"></script>
+
+            <script type="text/javascript" src="https://static.lufaxcdn.com/trading/resource/securityValid/main/securityValid.3edeb4a6.js"></script>
+
+    <script type="text/javascript" src="//static.lufaxcdn.com/lufax-public/statistic/statistic.9a599d27.js"></script>
+<!-- put int <head> tag-->
+
+<script language="javascript" type="text/javascript">
+    function loadWTScript(a, b) {
+        var c = document.createElement("script");
+        c.type = "text/javascript",
+                c.async = !0,
+                c.src = a,
+                dcsReady(c, b),
+                document.getElementsByTagName("head")[0].appendChild(c)
+    }
+    function dcsReady(a, b) {
+        a.readyState ? a.onreadystatechange = function() { ("loaded" == a.readyState || "complete" == a.readyState) && (a.onreadystatechange = null, b())
+        }: a.onload = function() {
+            b()
+        }
+    }
+    loadWTScript(window.location.protocol.indexOf('https:')==0?'https://pa-ssl.pingan.com/app_js/sdc/prd/sdc9.js':'http://www.pingan.com/app_js/sdc/prd/sdc9.js', function(){
+        if (typeof(_tag) != "undefined"){
+            _tag.dcsid="dcsxqgp7nakqoagskruioagxc_1k3h"; //dcsid参数用于设置日志记录在哪个文件里
+            _tag.DCSext.platform="lu";  //按需要修改成不同的平台名称，例如toa
+            var s=_tag.dcsGetIdAsync();
+            if(s)
+                dcsReady(s,function(){_tag.dcsCollect()});
+            else
+                _tag.dcsCollect();
+        }
+    })
+</script>
+<div style="display: none">
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1005340584/?value=0&guid=ON&script=0"/>
+        </div>
+    </noscript>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1005340584;
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+</div>
+</body>
+</html>

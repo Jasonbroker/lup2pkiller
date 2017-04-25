@@ -6,22 +6,14 @@ from bs4 import BeautifulSoup
 import pprint
 import json
 import pickle
+import configs
 
-HEADERS = {'ContentType': 'application/json; charset=UTF-8',
-           'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3)'
-                         ' AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'}
-
-qr_code = 'qr_code.jpg'
-
-cookie_file = 'cookies.log'
-
-base_url = 'https://list.lu.com'
-
-buy_base_url = 'https://list.lu.com/list'
-
-p2p_url = 'https://list.lu.com/list/transfer-p2p'
-
-test_login_url = 'https://my.lu.com/my/account'
+def perfermance_checker(fn, *args, **kwargs):
+    pretime = time.time()
+    def wrapper(*args, **kwargs):
+        fn(*args, **kwargs)
+    print('耗时 %f' % (time.time() - pretime))
+    return wrapper
 
 
 class LumoneyP2pTransfer:
@@ -31,8 +23,10 @@ class LumoneyP2pTransfer:
         self.debug = True
         self.last_productId = ''
         self.product_id_cache = {}
+        self.user_id = 30100743
 
         cookie_jar = self.get_cookies()
+        # cookie_jar = None
         if cookie_jar:
             self.session.cookies = cookie_jar
         else:
@@ -79,6 +73,7 @@ class LumoneyP2pTransfer:
                 self.save_cookies()
                 print('Login succeed====\n username: %s\n phone: %s' % (dic['userName'], dic['maskMobileNo']))
                 print(dic)
+                self.user_id = dic['userId']
             else:
                 return False
 
@@ -98,46 +93,18 @@ class LumoneyP2pTransfer:
         else:
             return None
 
-
     # return a list of suibable product id
     def check_suitable_productId(self):
-        r = self.session.get(p2p_url, headers=HEADERS)
+        r = self.session.get(configs.p2p_url, headers=configs.HEADERS)
         if r.status_code != 200:
             return None
         soup = BeautifulSoup(r.content, "lxml")
         samples = soup.find_all("li", class_="product-list")
-        url = self.select_product(samples, 10000)
-        return url
-
-    def buy_with_url(self, url):
-        buy_url = base_url + url
-        product_id = url.split('=')[1]
-        can_buy = False
-        if self.last_productId == product_id:
-            if self.debug:
-                print('same id ')
-        else:
-            # if self.debug:
-            #     print('will buy product')
-            #     self._safe_open(buy_url)
-            self.last_productId = product_id
-            if not self.is_login:
-                self.login()
-            # r = self.session.get(buy_url, headers=HEADERS)
-            # print(product_id)
-            # self.get_product_detail(product_id)
-
-            # print(detail.content)
-            # print(r.content.decode('utf-8'))
-            can_buy = self.invest_check(product_id, 0)
-
-        if can_buy:
-            print('go a head')
-        else:
-            self.sync_data()
+        return self.select_product(samples, 10000)
 
     def select_product(self, product_list, max_price):
         selected_url = None
+        fprice = 0
         for product in product_list[:-1]:
             url = product.find('a', class_='ld-btn').get('href')
             if self.product_id_cache.get(url):
@@ -155,13 +122,14 @@ class LumoneyP2pTransfer:
                 print('low interest %s buy jb' % interest)
                 continue
             price = product.find('em', class_='num-style').string
-            if float(price.strip().replace(',', '')) > max_price:
+            fprice = float(price.strip().replace(',', ''))
+            if fprice > max_price:
                 continue
 
             selected_url = url
-            print('已选择最优方案:', interest, price, discount, time_remaining, url)
+            print('已选择最优方案:', interest, fprice, discount, time_remaining, url)
             break
-        return selected_url
+        return selected_url, fprice
 
     def get_product_detail(self, product_id):
         url = 'https://trading.lu.com/trading/trade-info'
@@ -174,57 +142,127 @@ class LumoneyP2pTransfer:
             print('will buy product')
             self._safe_open(url)
 
-    def invest_check(self, product_id, amount):
-
-        '''productId: 145796624
-        investAmount: 8000.78
-        investSource: 0
-        isCheckSQ: 1
-        '''
+    # check - trace?sid = 278159279 & productId = 145843105 & userId = 30100743 & curStep = TRADE_INFO & _ = 1493088790949
+    # trade - info?productId = 145843105 & sid = 278159279
+    def invest_check(self, product_id, amount=''):
         dic = {
             'productId': product_id,
             'investAmount': amount,
             'investSource': 0,
             'isCheckSQ': 1,
         }
-        api = buy_base_url + '/itrading/invest-check'
+        api = configs.buy_base_url + '/itrading/invest-check'
         r = self.session.post(api, data=dic)
-        print(r.content.decode())
         result = r.json()
-        if self.debug:
-            print('cost: %f' % time.time())
-            print(result)
-        code = result['res_code']
-        return code == '0'
+        return result
 
+    # 不需要请求其实
+    def trade_info(self, product_id, sid):
+        api = configs.trading_url + '/trading/trade-info'
+        dic = {
+            'productId': product_id,
+            'sid': sid,
+        }
+        r = self.session.get(api, params=dic)
+        return r.content
 
+    '''{
+    	"res_code": "66",
+    	"res_msg": "投资申请已提交",
+    	"data": {
+    		"code": "66",
+    		"apiCode": "400066",
+    		"message": "购买验证通过，可开始交易",
+    		"locked": false,
+    		"sid": 278156788,
+    		"balanceAmount": 0,
+    		"riskLevelDesc": "稳健型",
+    		"productRiskLevelDesc": "保守型",
+    		"needWithholding": false,
+    		"paymentMethod": "8",
+    		"isRiskLevelMatch": true,
+    		"isCanResetRiskVerify": false,
+    		"riskVerifyLeftCount": 0,
+    		"riskVerifyTotalCount": 0,
+    		"isRiskVerifySysDefine": false,
+    		"virutalPartialInavailProductNamesList": []
+    	}
+    }'''
     def sync_data(self):
 
         while True:
             print('syncing at %f' % time.time())
-            url = self.check_suitable_productId()
+            url, cost = self.check_suitable_productId()
             # url 不存在说明没有数据，继续
             if not url:
                 continue
-            result = self.buy_with_url(url)
-            if result:
+
+            # 获取id
+            product_id = url.split('=')[1]
+            content_json = self.invest_check(product_id, cost)
+            can_buy = (content_json['res_code'] == '66')
+            print(content_json)
+            if can_buy:
+                print('go a head')
+                sid = content_json['data']['sid']
+                # check = self.check_trace(self.user_id, product_id, sid)
+                # print(check)
+                # contract = self.contract_info(product_id, sid)
+                # print(contract)
+                self.final_process(product_id, sid)
                 break
-            # self.test_data()
-            break
+
+    # https://trading.lu.com/trading/security-valid?productId = 145855546 & sid = 278205369
+    def final_process(self, product_id, sid):
+        # https: // user.lu.com / user / captcha / get - captcha?source = 1
+        api = configs.trading_url + '/trading/security-valid'
+        dic = {
+            'productId': product_id,
+            'sid': sid
+        }
+        if self.debug:
+            self._safe_open(api)
+        r = self.session.get(api, params=dic)
+        print('final html:\n')
+        print(r.content.decode())
+
+    def check_trace(self, user_id, product_id, sid, curStep=configs.TRADE_INFO):
+        url = configs.trading_url + '/trading/service/trade/check-trace'
+        dic = {
+            'sid': sid,
+            'productId': product_id,
+            'userId': user_id,
+            'curStep': curStep,
+            '_': int(time.time())
+        }
+        r = self.session.get(url, params=dic)
+        result = r.content.decode()
+        return result
+
+    # contract - info?productId = 145855546 & sid = 278205369 & riskLevel = 1
+    def contract_info(self, product_id, sid):
+        api = configs.trading_url + '/trading/contract-info'
+        dic = {
+            'sid': sid,
+            'productId': product_id,
+            'riskLevel': 1,
+        }
+        r = self.session.get(api, params=dic)
+        result = r.content.decode()
+        return result
 
 
 # helpers
     def save_cookies(self):
         cookies_jar = self.session.cookies
-        with open(cookie_file, 'wb') as f:
+        with open(configs.cookie_file, 'wb') as f:
             pickle.dump(cookies_jar, f, pickle.HIGHEST_PROTOCOL)
 
     def get_cookies(self):
-        with open(cookie_file, 'rb') as f:
-            cookie = pickle.load(f)
-            print(cookie)
+        with open(configs.cookie_file, 'rb') as f:
+                cookie = pickle.load(f)
+                print(cookie)
         return cookie
-
 
     def _safe_open(self, path):
         if platform.system() == "Linux":
@@ -239,7 +277,7 @@ class LumoneyP2pTransfer:
             'source': 'login',
             '_': int(time.time()*1000)
         }
-        r = self.session.get(url, params=param, headers=HEADERS)
+        r = self.session.get(url, params=param, headers=configs.HEADERS)
         if r.status_code == 200:
             print('success-----------\n')
             print(self.session.cookies.get_dict())
@@ -250,7 +288,7 @@ class LumoneyP2pTransfer:
             'source': "PC",
             'username': self.username
         }
-        check_r = self.session.post(check_url, params=para, headers=HEADERS)
+        check_r = self.session.post(check_url, params=para, headers=configs.HEADERS)
         print(check_r.text)
 
     def get_code(self):
@@ -259,11 +297,11 @@ class LumoneyP2pTransfer:
             'source': 'login',
             '_': int(time.time()*1000)
         }
-        r = self.session.get(url, params=param, headers=HEADERS)
+        r = self.session.get(url, params=param, headers=configs.HEADERS)
         print(self.session.cookies.get_dict())
-        with open(qr_code, 'wb') as f:
+        with open(configs.qr_code, 'wb') as f:
             f.write(r.content)
-            self._safe_open(qr_code)
+            self._safe_open(configs.qr_code)
 
     # 测试是否需要登录，如果需要登录则调用login
     def test_login(self):
@@ -271,31 +309,14 @@ class LumoneyP2pTransfer:
         if self.debug:
             print(r.history)
             print(r.url)
-        return len(r.history) <= 1
-
-
-    def test_data(self):
-        with open('test.html', 'rt', encoding='utf-8') as f:
-            data = f.read()
-
-        soup = BeautifulSoup(data, 'lxml')
-        samples = soup.find_all("li", class_="product-list")
-        print(samples[0])
-        url = self.select_product(samples, 10000)
-
-        # url 不存在说明没有数据，继续
-        if not url:
-            return
-        self.buy_with_url(url)
+        return len(r.history) <= 0
 
 
 if __name__ == '__main__':
     transfer = LumoneyP2pTransfer()
 
-    # redirect_url = transfer.login()
-    # if transfer.debug:
-        # r = transfer.session.get('https://my.lu.com/my/user-ms')
-        # print(r.content.decode())
+    redirect_url = transfer.login()
+
     transfer.sync_data()
 
 
