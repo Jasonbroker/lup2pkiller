@@ -18,3 +18,4 @@ p2p_url = 'https://list.lu.com/list/transfer-p2p'
 test_login_url = 'https://my.lu.com/my/account'
 
 trading_url = 'https://trading.lu.com'
+
