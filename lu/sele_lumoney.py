@@ -1,14 +1,11 @@
-from os import read
+import pickle
 
+import requests
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import pickle
-import configs
-import time
-from bs4 import BeautifulSoup
-import requests
-from requests.cookies import RequestsCookieJar
-from http.cookiejar import Cookie
+
+from lu import configs
 
 HEADERS = {'ContentType': 'application/json; charset=UTF-8',
            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3)'

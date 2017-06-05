@@ -5,8 +5,9 @@ import requests
 
 #网络请求操作类
 class http_client:
-    def __init__(self):
+    def __init__(self, privatekey):
         self.session = requests.session()
+        self.privateKey = privatekey
     '''
         用于请求的Headers
     '''
@@ -22,15 +23,13 @@ class http_client:
 
     #发送post请求
     def http_post(self, url, data, headers={}):
-        try:
-            custom_header = self.REQUEST_HEADER
-            for head in headers:
-                custom_header[head] = headers[head]
 
-            r = self.session.post(url=url, data=data, headers=custom_header)
-            return r.json('utf-8')
-        except Exception as ex:
-            print (ex)
-        return ""
+        custom_header = self.REQUEST_HEADER
+        for head in headers:
+            custom_header[head] = headers[head]
+        print('http_post \n', url, data, custom_header)
+        r = self.session.post(url=url, data=data, headers=custom_header)
+        print('http post content:\n', r.content)
+        return r.content
             
 

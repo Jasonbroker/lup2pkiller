@@ -2,26 +2,30 @@
 __author__ = "yangl"
 
 
-import base64 
+import base64
 import rsa
-import Global
- 
+
 # rsa操作类
 class rsa_client:
-    
+
     '''''
     RSA签名
     '''
     @staticmethod
-    def sign(signdata):
+    def sign(signdata, privatekey):
         '''''
         @param signdata: 需要签名的字符串
         '''
         signdata = signdata.lower()
-        PrivateKey = rsa.PrivateKey.load_pkcs1(Global.privatekey)
-        signature = base64.b64encode(rsa.sign(signdata, PrivateKey, 'SHA-1'))
+        # pkcs1 = rsa.PrivateKey.load_pkcs1(privatekey)
+        # signature = rsa.encrypt(signdata.encode(), pkcs1)
+        # signature = base64.b64decode(sign)
+
+        pkcs1 = rsa.PrivateKey.load_pkcs1(privatekey)
+        signature = base64.b64encode(rsa.sign(signdata.encode(), pkcs1, 'SHA-1'))
+
         return signature
-#       
+#
 
     @staticmethod
     def sort(dicts):

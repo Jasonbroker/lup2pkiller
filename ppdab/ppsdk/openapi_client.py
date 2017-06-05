@@ -6,6 +6,7 @@ Created on 2016年7月5日
 '''
 
 import datetime
+import json
 
 from .core.pphttpclient import http_client
 from .core.rsa_client import rsa_client
@@ -24,9 +25,9 @@ class openapi_client:
     '''
     REFRESHTOKEN_URL = "https://ac.ppdai.com/oauth2/refreshtoken"
 
-
-    def __init__(self, params):
-        self.http_client = http_client()
+    def __init__(self, private_key):
+        self.http_client = http_client(privatekey=private_key)
+        self.private_key = private_key
         '''
         Constructor
         '''
@@ -36,12 +37,17 @@ class openapi_client:
     AppId 应用ID
     code 授权码
     '''
-    def authorize(self, appid,code):
-        data = "{\"AppID\":\"%s\",\"Code\":\"%s\"}" % (appid,code)
+    def authorize(self, appid, code):
+        data = {
+            'AppID': appid,
+            'Code': code
+        }
+        data = "{\"AppID\":\"%s\",\"Code\":\"%s\"}" % (appid, code)
         data = data.encode("utf-8")
-        result = self.http_client.http_post(openapi_client.AUTHORIZE_URL,data)
-        #result = gzip.GzipFile(fileobj=StringIO.StringIO(result),mode="r")
-        #result = result.read().decode("gbk").encode("utf-8")
+        print('authorize data: ', data)
+        result = self.http_client.http_post(openapi_client.AUTHORIZE_URL, data=data)
+        # result = gzip.GzipFile(fileobj=StringIO.StringIO(result),mode="r")
+        # result = result.read().decode("gbk").encode("utf-8")
         print("authorize_data:%s" % (result))
         return result
         
@@ -51,6 +57,7 @@ class openapi_client:
     OpenId 用户唯一标识
     RefreshToken 刷新令牌Token
     '''
+
     def refresh_token(self, appid,openid,refreshtoken):
         data = "{\"AppID\":\"%s\",\"OpenId\":\"%s\",\"RefreshToken\":\"%s\"}" % (appid,openid,refreshtoken)
         result = self.http_client.http_post(openapi_client.REFRESHTOKEN_URL,data)
@@ -68,15 +75,23 @@ class openapi_client:
     def send(self, url, data, appid, sign, accesstoken=''):
         utctime = datetime.datetime.utcnow()
         timestamp = utctime.strftime('%Y-%m-%d %H:%M:%S')
-        headers = {"X-PPD-APPID":appid,
-                   "X-PPD-SIGN":sign,
-                   "X-PPD-TIMESTAMP":timestamp,
-                   "X-PPD-TIMESTAMP-SIGN":rsa_client.sign("%s%s" % (appid,timestamp))}
+        '''
+        headers = {"X-PPD-APPID": appid,
+                   "X-PPD-SIGN": str(sign),
+                   "X-PPD-TIMESTAMP": timestamp,
+                   "X-PPD-TIMESTAMP-SIGN": str(rsa_client.sign("%s%s" % (appid, timestamp), self.private_key))}
+        '''
+        headers = {"X-PPD-APPID": appid,
+                   "X-PPD-SIGN": sign.decode(),
+                   "X-PPD-TIMESTAMP": timestamp,
+                   "X-PPD-TIMESTAMP-SIGN": rsa_client.sign("%s%s" % (appid, timestamp), self.private_key).decode()}
+
+        data = json.dumps(data).lower()
+
         if accesstoken.strip():
             headers["X-PPD-ACCESSTOKEN"] = accesstoken
-        data = data.lower()
+        # data = data.lower()
         result = self.http_client.http_post(url, data, headers=headers)
-        print("send_data:%s" % (result))
         return result
         
         

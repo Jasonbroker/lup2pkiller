@@ -1,12 +1,15 @@
-import requests
-import os
-import platform
-import time
-from bs4 import BeautifulSoup
-import pprint
 import json
+import os
 import pickle
-import configs
+import platform
+import pprint
+import time
+
+import requests
+from bs4 import BeautifulSoup
+
+from lu import configs
+
 
 def perfermance_checker(fn, *args, **kwargs):
     pretime = time.time()
