@@ -61,7 +61,9 @@ class auto_bit_killer:
         xmldata = self.client.send(url=url, data=data, appid=self.APPID, sign=sign, accesstoken=access_token).decode()
         print('xml data', xmldata)
 
-
+    '''
+    返回需要继续取得详情的列表
+    '''
     def parse_bid_list(self, xml_string):
 
         dom = xml.dom.minidom.parseString(xml_string)
@@ -69,9 +71,17 @@ class auto_bit_killer:
 
         loan_infos = root.getElementsByTagName("LoanInfos")[0]
 
-        # bid_list_xml = loan_infos.childNodes
+        filteredElements = []
         for element in loan_infos.childNodes:
-            print(element)
+            # 借款数
+            amount = element.getElementsByTagName('Amount')[0].childNodes[0].nodeValue
+            print('借款数：' + amount)
+
+
+
+
+
+
             
 
 

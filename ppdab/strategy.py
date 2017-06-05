@@ -34,3 +34,31 @@ aY7JYP8&key=41ecb04b05111003f4f6dfe51191e926f5bbaa1259f7bc4590fb16
 根据用户群划分。对我们而言abcd 没有太大意义。
 '''
 
+class Strategy:
+
+    STRATEGY_SAFE_AA = 1
+    STRATEGY_BEST_GAIN_16 = 2
+    STRATEGY_FEMALE_16 = 3
+
+    MALE = 10       # 男的
+    FEMALE = 11     # 女的
+    SEXANY = 12     # 任意性别
+
+    CreditCodeA = 17
+    CreditCodeB = 18
+    CreditCodeC = 19
+    CreditCodeD = 20
+
+    def __init__(self, strategy):
+        if strategy == Strategy.STRATEGY_SAFE_AA:
+            self.max_amount = 10000
+            self.sex = Strategy.SEXANY
+            self.credit = Strategy.CreditCodeA
+        elif strategy == Strategy.STRATEGY_BEST_GAIN_16:
+            self.max_amount = 6000
+            self.sex = Strategy.FEMALE
+            self.credit = Strategy.CreditCodeC
+            self.age_from = 18
+            self.age_to = 21
+
+
