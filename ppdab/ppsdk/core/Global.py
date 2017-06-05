@@ -14,7 +14,8 @@ AND
 并且将回车符剔除
 '''
 
-privatekey='''
+privatekey= 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC58LP3rZQeP+H3tkkHKx/N00E5gM4fmzVAkgaMuzYFJTKvapzwPAZ4UdLIfVknF2v/FLYEhhPoWaco4QI+WO4vvl+KJ09JZuG7xmWj5QX27+i/8ZgCcy0HodfN5bd/jcSswpx9MfZqxUVXQACq7C5fovV02OlJILLxCXGWmZiT7QIDAQAB'
+'''
 -----BEGIN RSA PRIVATE KEY-----
 MIICxxxxxxxxxxxxxxxxxxxxtomTKoDQ/cRv6fzTgYIRJElpA+vgy5VncgK/Ko6R
 85ZAzG7KEOtiwDgaggy1T8oacdF0KmH2P2jwiFldCV+Rk5KQae+jmUnyr8xAzqNg

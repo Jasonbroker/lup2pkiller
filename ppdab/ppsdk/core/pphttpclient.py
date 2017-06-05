@@ -1,13 +1,12 @@
 #coding=utf-8
-import urllib2
 
 __author__ = "yangl"
-
-from urllib2 import Request  # Python 2
+import requests
 
 #网络请求操作类
 class http_client:
-    
+    def __init__(self):
+        self.session = requests.session()
     '''
         用于请求的Headers
     '''
@@ -20,22 +19,16 @@ class http_client:
                   'Content-Type':'application/json;charset=utf-8'
                   }
 
+
     #发送post请求
-    @staticmethod
-    def http_post(url,data,headers={}):
+    def http_post(self, url, data, headers={}):
         try:
-            req = Request(url)
-            for header in http_client.REQUEST_HEADER:
-                req.add_header(header, http_client.REQUEST_HEADER[header])
-                
+            custom_header = self.REQUEST_HEADER
             for head in headers:
-                req.add_header(head, headers[head])
-            opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
-            response = opener.open(req,data = data,timeout=5)
-#             data = StringIO.StringIO(response.read())
-#             gzipper = gzip.GzipFile(fileobj=data)
-#             return gzipper.read()
-            return response.read()
+                custom_header[head] = headers[head]
+
+            r = self.session.post(url=url, data=data, headers=custom_header)
+            return r.json('utf-8')
         except Exception as ex:
             print (ex)
         return ""

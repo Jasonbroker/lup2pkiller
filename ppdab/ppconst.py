@@ -1,0 +1,15 @@
+# some consts for ppd
+
+APPID = '2f9f35c5c24e4968849d7bfa1fe9fbf3'
+
+APPSECRET = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC58LP3rZQeP+H3tkkHK' \
+            'x/N00E5gM4fmzVAkgaMuzYFJTKvapzwPAZ4UdLIfVknF2v/FLYEhhPoWaco4' \
+            'QI+WO4vvl+KJ09JZuG7xmWj5QX27+i/8ZgCcy0HodfN5bd/jcSswpx9MfZqxU' \
+            'VXQACq7C5fovV02OlJILLxCXGWmZiT7QIDAQAB'
+
+APPPUBLIC = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCRAmNaxDeRFF06gwClvn1K9J' \
+            'zvxeGYBFT8zdSi1YJW7FglB3xg4m3nwADQ9PpZ6dNKdpj0HDq8PheaWbfNjiNH' \
+            'mG604+ov9Zx7N3sMaA1K9YyDTfQrZAyGZcCpLTSxgtPT+oLoM2OF3Q+g/gund9' \
+            'm1S2wp0hAml89uA0ck8qx8LQIDAQAB'
+
+
