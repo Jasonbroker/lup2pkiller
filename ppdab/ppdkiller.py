@@ -3,6 +3,7 @@ from requests.utils import quote
 from ppdab.ppsdk.core import rsa_client
 import json
 import xml.dom.minidom
+from  ppdab.strategy import Strategy
 import rsa
 # some consts for ppd
 
@@ -64,7 +65,7 @@ class auto_bit_killer:
     '''
     返回需要继续取得详情的列表
     '''
-    def parse_bid_list(self, xml_string):
+    def parse_bid_list(self, xml_string, strategy):
 
         dom = xml.dom.minidom.parseString(xml_string)
         root = dom.documentElement
@@ -76,7 +77,13 @@ class auto_bit_killer:
             # 借款数
             amount = element.getElementsByTagName('Amount')[0].childNodes[0].nodeValue
             print('借款数：' + amount)
+            if float(amount) > strategy.max_amount:
+                print('太贵')
+                continue
 
+            listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
+            filteredElements.append(listingId)
+        return filteredElements
 
 
 
@@ -100,5 +107,7 @@ if __name__ == '__main__':
     with open('test_xml', 'r') as f:
         xml_file = f.read()
 
-    transfer.parse_bid_list(xml_file)
+    strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
+    listingIds = transfer.parse_bid_list(xml_file, strategy)
+    print(listingIds.__len__())
 

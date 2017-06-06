@@ -60,5 +60,5 @@ class Strategy:
             self.credit = Strategy.CreditCodeC
             self.age_from = 18
             self.age_to = 21
-
+            self.mini_rate = 16  # 最小利率
 
