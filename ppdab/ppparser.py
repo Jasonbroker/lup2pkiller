@@ -57,14 +57,25 @@ class PPParser:
             remain = element.getElementsByTagName('RemainFunding')[0].childNodes[0].nodeValue
             if float(remain) <= 0:
                 continue
-            # OwingAmount
+            # 看欠钱是不是太多
+            own_amount = element.getElementsByTagName('OwingAmount')[0].childNodes[0].nodeValue
+            if float(own_amount) > strategy.max_owning:
+                continue
+            # 要求性别
+            gender = element.getElementsByTagName('Gender')[0].childNodes[0].nodeValue
+            gender = int(gender)
+            if gender != strategy.gender:
+                continue
+
+
+
 
             # 借款数
             amount = element.getElementsByTagName('Amount')[0].childNodes[0].nodeValue
             print('借款数：' + amount)
             amount = float(amount)
             if amount > strategy.max_amount or amount < strategy.min_amount:
-                print('太贵')
+                print('价格不合适')
                 continue
 
             listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
