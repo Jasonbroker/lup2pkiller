@@ -56,7 +56,7 @@ class Strategy:
             self.credit = Strategy.CreditCodeA
         elif strategy == Strategy.STRATEGY_BEST_GAIN_16:
             self.max_amount = 6000
-            self.min_amount = 2000
+            self.min_amount = 1000
             self.sex = Strategy.FEMALE
             self.credit = Strategy.CreditCodeC
             self.age_from = 18
