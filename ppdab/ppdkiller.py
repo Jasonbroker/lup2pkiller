@@ -1,9 +1,10 @@
 import ppdab.ppsdk.openapi_client
 from requests.utils import quote
 from ppdab.ppsdk.core import rsa_client
-import json
 import xml.dom.minidom
-from  ppdab.strategy import Strategy
+from ppdab.strategy import Strategy
+from ppdab.ppparser import PPParser
+
 import rsa
 # some consts for ppd
 
@@ -12,18 +13,6 @@ import rsa
 class auto_bit_killer:
     APPID = '2f9f35c5c24e4968849d7bfa1fe9fbf3'
     appid2 = 'c2be1f8150b24544a373644cc4d65932'
-
-    # APPSECRET = b'-----BEGIN RSA PRIVATE KEY-----' \
-    #             b'MIICXAIBAAKBgQCTiBIu4IvY/iT5zKy3v9NVTOCcomfVdib0l/LTq0xU2RW2W8nzfCfeG6ogeMOOYsVz+6vcSG6' \
-    #             b'yGtoO/+bQpk51QG4RyTYPgPEEgUPfVz8YBCw6wbeY+BkkSn9Z59UOz9robAAeqtcsh89vCPbzQwTqnV+7wL8i5AAi' \
-    #             b'5Gv6LVGuPQIDAQABAoGAQyvOE5fbNJYqIa4l6ZemUg0pq0dqfU9JV04jmmpA29TnRNsv7PNXd5Ii+Jvjdd3UxwUMb' \
-    #             b'8Ru2hrNs8yhu9gsmhXOqh8p4y7go60mKa5gigD1Ne7AYCKN6USFJc2BXAesIRclqJVwbX1TsF1R8K4m8YfVmX+OZhW' \
-    #             b'3XZz0wISoHqUCQQDbf4j3d99McloBWiMFz1bwDfpzcUiZq1i9K/BC56LKXfDlrUQrU5a5iGLGo20DcVxy8Q+RjREQ' \
-    #             b'MaobxgLGJZf7AkEArBDGfUUy73Dfy+tKOZWADR2VO7tjmrug9dhFJosSbT7qD7CwPmwUC3kCHA9EUtlRJH6Icy3v/URM' \
-    #             b'UpwwwKzlJwJBANUbnNKPmshxGbvIVMqWRNUq7SfaK9+uwahhGZMLrD0IOhP0RoQ+Us9tgGFVWEkIbfbW3wO0z4VGgt8' \
-    #             b'WP6k75LMCQBfwZY08OW/yxlA6tiL41837Va3vzlXS0PwjUMuiAbhNTodMT9j/dHJ8LXz16s2UCqQHLrjHpWIZRH0h2e6' \
-    #             b'Un3UCQD3nvYBGw2d3aN2KtjS2k1EhhXkIGeDqLL011NN905C1cvruocEGhq3OraZTmz/ixIwVUg26DURd+vYlkfOB1Rg=' \
-    #             b'-----END RSA PRIVATE KEY-----'
 
     APPPUBLIC = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCRAmNaxDeRFF06gwClvn1K9JzvxeGYBFT8zdSi1YJW7FglB3xg4m3n' \
                 'wADQ9PpZ6dNKdpj0HDq8PheaWbfNjiNHmG604+ov9Zx7N3sMaA1K9YyDTfQrZAyGZcCpLTSxgtPT+oLoM2OF3Q+g/gu' \
@@ -62,31 +51,6 @@ class auto_bit_killer:
         xmldata = self.client.send(url=url, data=data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
         print('xml data', xmldata)
 
-    '''
-    返回需要继续取得详情的列表
-    '''
-    def parse_bid_list(self, xml_string, strategy):
-
-        dom = xml.dom.minidom.parseString(xml_string)
-        root = dom.documentElement
-
-        loan_infos = root.getElementsByTagName("LoanInfos")[0]
-
-        filteredElements = []
-        for element in loan_infos.childNodes:
-            # 借款数
-            amount = element.getElementsByTagName('Amount')[0].childNodes[0].nodeValue
-            print('借款数：' + amount)
-            amount = float(amount)
-            if amount > strategy.max_amount or amount < strategy.min_amount:
-                print('太贵')
-                continue
-
-            listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
-            filteredElements.append(listingId)
-            if len(filteredElements) == 10:
-                break
-        return filteredElements
 
     '''detail bids'''
     def batch_bid_detail(self, listing_ids):
@@ -99,31 +63,6 @@ class auto_bit_killer:
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
         list_result = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
         print(list_result)
-
-    def parse_bid_detail_list(self, xml_string, strategy):
-        dom = xml.dom.minidom.parseString(xml_string)
-        root = dom.documentElement
-
-        loan_infos = root.getElementsByTagName("LoanInfos")[0]
-
-        filteredElements = []
-        for element in loan_infos.childNodes:
-            # 借款数
-            amount = element.getElementsByTagName('Amount')[0].childNodes[0].nodeValue
-            print('借款数：' + amount)
-            amount = float(amount)
-            if amount > strategy.max_amount or amount < strategy.min_amount:
-                print('太贵')
-                continue
-
-            listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
-            filteredElements.append(listingId)
-            if len(filteredElements) > 8:
-                break
-        return filteredElements
-
-
-
 
 
 
@@ -154,7 +93,7 @@ if __name__ == '__main__':
         xml_file = f.read()
 
     strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
-    listingIds = transfer.parse_bid_detail_list(xml_file, strategy)
+    listingIds = PPParser.parse_bid_detail_list(xml_file, strategy)
     # 符合初期预期的listId
     print(len(listingIds))
 
