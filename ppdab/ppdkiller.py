@@ -84,7 +84,7 @@ class auto_bit_killer:
 
             listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
             filteredElements.append(listingId)
-            if len(filteredElements) > 8:
+            if len(filteredElements) == 10:
                 break
         return filteredElements
 
@@ -92,27 +92,35 @@ class auto_bit_killer:
     def batch_bid_detail(self, listing_ids):
         # 新版散标详情批量接口（请求列表不大于10）
         url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingInfos"
-
         data = {
             "ListingIds": listing_ids
         }
-
-        print(data)
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
         list_result = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
         print(list_result)
 
     def parse_bid_detail_list(self, xml_string, strategy):
+        dom = xml.dom.minidom.parseString(xml_string)
+        root = dom.documentElement
 
+        loan_infos = root.getElementsByTagName("LoanInfos")[0]
 
+        filteredElements = []
+        for element in loan_infos.childNodes:
+            # 借款数
+            amount = element.getElementsByTagName('Amount')[0].childNodes[0].nodeValue
+            print('借款数：' + amount)
+            amount = float(amount)
+            if amount > strategy.max_amount or amount < strategy.min_amount:
+                print('太贵')
+                continue
 
-
-
-
-
-            
-
+            listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
+            filteredElements.append(listingId)
+            if len(filteredElements) > 8:
+                break
+        return filteredElements
 
 
 
@@ -126,20 +134,31 @@ if __name__ == '__main__':
     # transfer.authorize()
     # transfer.bid_list()
 
-    with open('test_xml', 'r') as f:
+    # with open('test_xml', 'r') as f:
+    #     xml_file = f.read()
+    #
+    # strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
+    # listingIds = transfer.parse_bid_list(xml_file, strategy)
+    # # 符合初期预期的listId
+    # print(len(listingIds))
+    # data = {
+    #     "ListingIds": [
+    #         23886149,
+    #         23886150
+    #     ]
+    # }
+    # print(data)
+    # transfer.batch_bid_detail(listingIds)
+
+    with open('detail.xml', 'r') as f:
         xml_file = f.read()
 
     strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
-    listingIds = transfer.parse_bid_list(xml_file, strategy)
+    listingIds = transfer.parse_bid_detail_list(xml_file, strategy)
     # 符合初期预期的listId
     print(len(listingIds))
-    data = {
-        "ListingIds": [
-            23886149,
-            23886150
-        ]
-    }
-    print(data)
-    transfer.batch_bid_detail(listingIds)
+
+
+
 
 
