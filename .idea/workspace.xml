@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eae192b4-9e9e-456d-8a16-0f7024386559" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/ppdkiller.py" afterPath="$PROJECT_DIR$/ppdab/ppdkiller.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/ppparser.py" afterPath="$PROJECT_DIR$/ppdab/ppparser.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/strategy.py" afterPath="$PROJECT_DIR$/ppdab/strategy.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,10 +14,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ppdkiller.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ppdkiller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ppdab/ppdkiller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
+            <state relative-caret-position="-439">
               <caret line="14" column="47" lean-forward="false" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
@@ -31,18 +29,18 @@
       <file leaf-file-name="ppparser.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ppdab/ppparser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="34" column="14" lean-forward="false" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="14" />
+            <state relative-caret-position="353">
+              <caret line="41" column="11" lean-forward="false" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strategy.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="strategy.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ppdab/strategy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="80" column="56" lean-forward="true" selection-start-line="80" selection-start-column="56" selection-end-line="80" selection-end-column="56" />
+            <state relative-caret-position="576">
+              <caret line="83" column="56" lean-forward="false" selection-start-line="83" selection-start-column="56" selection-end-line="83" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -132,8 +130,8 @@
         <option value="$PROJECT_DIR$/ppdab/ppsdk/detail.xml" />
         <option value="$PROJECT_DIR$/ppdab/detail.xml" />
         <option value="$PROJECT_DIR$/ppdab/ppparser.py" />
-        <option value="$PROJECT_DIR$/ppdab/strategy.py" />
         <option value="$PROJECT_DIR$/ppdab/ppdkiller.py" />
+        <option value="$PROJECT_DIR$/ppdab/strategy.py" />
       </list>
     </option>
   </component>
@@ -862,29 +860,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ppdab/ppdkiller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-439">
+          <caret line="14" column="47" lean-forward="false" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ppdab/ppparser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="34" column="14" lean-forward="false" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="14" />
+        <state relative-caret-position="353">
+          <caret line="41" column="11" lean-forward="false" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ppdab/strategy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="80" column="56" lean-forward="true" selection-start-line="80" selection-start-column="56" selection-end-line="80" selection-end-column="56" />
+        <state relative-caret-position="576">
+          <caret line="83" column="56" lean-forward="false" selection-start-line="83" selection-start-column="56" selection-end-line="83" selection-end-column="56" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/ppdkiller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="14" column="47" lean-forward="false" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

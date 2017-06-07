@@ -79,6 +79,9 @@ class Strategy:
             self.min_normal_count = 0
             self.max_overdue_less_count = 3  # 最大15天以内逾期
             self.max_overdue_more_count = 0  # 最大15天以上逾期
+            self.min_success_count = 0
+            self.max_success_count = 20
+            self.max_wast_count = 5         # 流标次数不能超过5次
 
 
 
