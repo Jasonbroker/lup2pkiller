@@ -1,47 +1,5 @@
 import xml
 
-'''
-<Age>23</Age>
-<Amount>5250.0000</Amount>
-<AmountToReceive>0</AmountToReceive>
-<AuditingTime>2017-05-21T15:11:04.25</AuditingTime>  // 成交日期
-<BorrowName>pdu7614660027</BorrowName>   // 借款人的用户名
-<CancelCount>1</CancelCount>  // 撤标次数
-<CertificateValidate>1</CertificateValidate>  学历认证
-<CreditCode>B</CreditCode>
-<CreditValidate>0</CreditValidate>  // 征信认证
-<CurrentRate>18</CurrentRate>
-<DeadLineTimeOrRemindTimeStr>2017/5/21</DeadLineTimeOrRemindTimeStr>
-<EducateValidate>0</EducateValidate>  学籍认证
-<EducationDegree>\xe4\xb8\x93\xe7\xa7\x91</EducationDegree> 学历
-<FailedCount>0</FailedCount> liubao
-<FirstSuccessBorrowTime>2016-07-06T09:40:56.263</FirstSuccessBorrowTime> // 第一次成功借款
-<FistBidTime>2017-05-20T13:42:14.447</FistBidTime>
-<Gender>2</Gender>  性别	1 男 2 女 0 未知
-<GraduateSchool>\xe4\xb8\xad\xe5\x8d\x97\xe5\xa4\xa7\xe5\xad\xa6</GraduateSchool>
-<HighestDebt>17052.7200</HighestDebt>  历史最高负债
-<HighestPrincipal>8000.0000</HighestPrincipal>
-<LastBidTime>2017-05-21T15:11:03.83</LastBidTime>
-<LastSuccessBorrowTime>2017-05-20T13:11:37</LastSuccessBorrowTime>
-<LenderCount>64</LenderCount>
-<ListingId>48209704</ListingId>
-<Months>12</Months>
-<NciicIdentityCheck>0</NciicIdentityCheck>  户籍认证
-<NormalCount>16</NormalCount>正常还清次数
-<OverdueLessCount>3</OverdueLessCount> 逾期(1-15)还清次数
-<OverdueMoreCount>0</OverdueMoreCount> 逾期(15天以上)还清次数
-<OwingAmount>15909.1500</OwingAmount>  待还金额
-<OwingPrincipal>14861.6600</OwingPrincipal>  剩余待还本金
-<PhoneValidate>1</PhoneValidate>
-<RegisterTime>2016-07-06T07:38:11</RegisterTime>
-<RemainFunding>0.0000</RemainFunding> 剩余可投
-<StudyStyle>\xe6\x88\x90\xe4\xba\xba</StudyStyle> 学习形式
-<SuccessCount>5</SuccessCount>
-<TotalPrincipal>25200.0000</TotalPrincipal>
-<VideoValidate>0</VideoValidate>
-<WasteCount>0</WasteCount>
-'''
-
 class PPParser:
 
     @staticmethod
@@ -71,14 +29,17 @@ class PPParser:
             age = int(age)
             if age > strategy.age_to or age < strategy.age_from:
                 continue
-            # fail count
-            
-
-
-
-
-
-
+            # 流标次数
+            wastcount = element.getElementsByTagName('WasteCount')[0].childNodes[0].nodeValue
+            wastcount = int(wastcount)
+            failcount = int(element.getElementsByTagName('FailedCount')[0].childNodes[0].nodeValue)
+            if wastcount > strategy.max_wast_count or failcount > strategy.max_wast_count:
+                continue
+            # 正常还款期数
+            normalcount = element.getElementsByTagName('NormalCount')[0].childNodes[0].nodeValue
+            normalcount = int(normalcount)
+            if normalcount > strategy.max_normal_count:
+                continue
             # 借款数
             amount = element.getElementsByTagName('Amount')[0].childNodes[0].nodeValue
             print('借款数：' + amount)
@@ -86,6 +47,39 @@ class PPParser:
             if amount > strategy.max_amount or amount < strategy.min_amount:
                 print('价格不合适')
                 continue
+            # PhoneValidate 手机验证
+            # 至少是个手机验证吧？连个手机验证都没有玩啥？
+            phoneValidate = element.getElementsByTagName('PhoneValidate')[0].childNodes[0].nodeValue
+            phoneValidate = int(phoneValidate)
+            if phoneValidate != 1:
+                continue
+
+            # 学历认证
+            certificateValidate = element.getElementsByTagName('CertificateValidate')[0].childNodes[0].nodeValue
+            certificateValidate = int(certificateValidate)
+
+            # 学籍认证
+            nciicIdentityCheck = element.getElementsByTagName('NciicIdentityCheck')[0].childNodes[0].nodeValue
+            nciicIdentityCheck = int(nciicIdentityCheck)
+            # 征信认证
+            certificateValidate = element.getElementsByTagName('CertificateValidate')[0].childNodes[0].nodeValue
+            certificateValidate = int(certificateValidate)
+            # 15天以内逾期
+
+            # 15天以上逾期
+
+            # 最还款次数
+
+
+
+
+
+
+
+
+
+
+
 
             listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
             filtered_elements.append(listingId)
