@@ -66,6 +66,15 @@ class PPParser:
             gender = int(gender)
             if gender != strategy.gender:
                 continue
+            # 年龄要求
+            age = element.getElementsByTagName('Age')[0].childNodes[0].nodeValue
+            age = int(age)
+            if age > strategy.age_to or age < strategy.age_from:
+                continue
+            # fail count
+            
+
+
 
 
 
