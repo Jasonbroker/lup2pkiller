@@ -48,28 +48,46 @@ class PPParser:
                 print('价格不合适')
                 continue
             # PhoneValidate 手机验证
-            # 至少是个手机验证吧？连个手机验证都没有玩啥？
+            # 至少是个手机验证。
             phoneValidate = element.getElementsByTagName('PhoneValidate')[0].childNodes[0].nodeValue
             phoneValidate = int(phoneValidate)
             if phoneValidate != 1:
                 continue
 
+            # 15天以上逾期
+            overdue_more_count = element.getElementsByTagName('OverdueMoreCount')[0].childNodes[0].nodeValue
+            overdue_more_count = int(overdue_more_count)
+            if overdue_more_count > strategy.max_overdue_more_count:
+                continue
+            # 15天以内逾期
+            overdue_less_count = element.getElementsByTagName('OverdueLessCount')[0].childNodes[0].nodeValue
+
+            overdue_less_count = int(overdue_less_count)
+            if overdue_less_count > strategy.max_overdue_less_count:
+                continue
+
             # 学历认证
             certificateValidate = element.getElementsByTagName('CertificateValidate')[0].childNodes[0].nodeValue
             certificateValidate = int(certificateValidate)
-
+            if certificateValidate != strategy.certificate_validate:
+                continue
             # 学籍认证
-            nciicIdentityCheck = element.getElementsByTagName('NciicIdentityCheck')[0].childNodes[0].nodeValue
+            nciicIdentityCheck = element.getElementsByTagName('EducateValidate')[0].childNodes[0].nodeValue
             nciicIdentityCheck = int(nciicIdentityCheck)
+            if nciicIdentityCheck != strategy.educate_validate:
+                continue
             # 征信认证
-            certificateValidate = element.getElementsByTagName('CertificateValidate')[0].childNodes[0].nodeValue
-            certificateValidate = int(certificateValidate)
-            # 15天以内逾期
-
-            # 15天以上逾期
+            creditvalidate = element.getElementsByTagName('CreditValidate')[0].childNodes[0].nodeValue
+            creditvalidate = int(creditvalidate)
+            if creditvalidate != strategy.credit_validate:
+                continue
 
             # 最还款次数
-
+            # 征信认证
+            creditvalidate = element.getElementsByTagName('CreditValidate')[0].childNodes[0].nodeValue
+            creditvalidate = int(creditvalidate)
+            if creditvalidate != strategy.credit_validate:
+                continue
 
 
 
