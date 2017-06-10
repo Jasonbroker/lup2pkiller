@@ -78,14 +78,19 @@ class PPParser:
             if certificateValidate != strategy.certificate_validate:
                 continue
             # 学籍认证
-            nciicIdentityCheck = element.getElementsByTagName('EducateValidate')[0].childNodes[0].nodeValue
-            nciicIdentityCheck = int(nciicIdentityCheck)
-            if nciicIdentityCheck != strategy.educate_validate:
+            educate_validate = element.getElementsByTagName('EducateValidate')[0].childNodes[0].nodeValue
+            educate_validate = int(educate_validate)
+            if educate_validate != strategy.educate_validate:
                 continue
             # 征信认证
             creditvalidate = element.getElementsByTagName('CreditValidate')[0].childNodes[0].nodeValue
             creditvalidate = int(creditvalidate)
             if creditvalidate != strategy.credit_validate:
+                continue
+            # 户籍认证
+            nciic_identity = element.getElementsByTagName('CreditValidate')[0].childNodes[0].nodeValue
+            nciic_identity = int(nciic_identity)
+            if nciic_identity != strategy.nciic_identity:
                 continue
 
             # 最还款次数
@@ -95,7 +100,10 @@ class PPParser:
             if creditvalidate != strategy.credit_validate:
                 continue
 
+            # 自考，本科，大专，研究生，博士
+            education_degree = element.getElementsByTagName('EducationDegree')[0].childNodes[0].nodeValue
 
+            graduate_school = element.getElementsByTagName('GraduateSchool')[0].childNodes[0].nodeValue
 
 
 

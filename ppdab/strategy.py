@@ -151,7 +151,8 @@ class Strategy:
             self.max_owning = 8000  # 最大待还，如果待还数目太多该人风险太高了
             self.certificate_validate = 0  # 是否需要学历认证
             self.credit_validate = 0  # 征信认证，如果有征信认证，得分相应提升
-            self.educate_validate = 0 # 学籍认证
+            self.educate_validate = 0  # 学籍认证
+            self.nciic_identity = 0  # 户籍认证
             self.min_last_borrow_interval = 10  # 最小时间间隔，太频繁不好。
             self.min_month = 6  # 最小借几个月
             self.max_month = 12  # 最多借几个月
