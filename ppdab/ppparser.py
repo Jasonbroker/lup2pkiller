@@ -102,7 +102,7 @@ class PPParser:
 
             # 自考，本科，大专，研究生，博士
             education_degree = element.getElementsByTagName('EducationDegree')[0].childNodes[0].nodeValue
-
+            # 毕业院校，有些学校可能需要排除掉
             graduate_school = element.getElementsByTagName('GraduateSchool')[0].childNodes[0].nodeValue
 
 
