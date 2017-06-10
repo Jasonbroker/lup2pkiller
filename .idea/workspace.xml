@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eae192b4-9e9e-456d-8a16-0f7024386559" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/ppparser.py" afterPath="$PROJECT_DIR$/ppdab/ppparser.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,7 +20,7 @@
           <file leaf-file-name="ppdkiller.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/ppdab/ppdkiller.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="236">
+                <state relative-caret-position="1394">
                   <caret line="82" column="14" lean-forward="false" selection-start-line="82" selection-start-column="14" selection-end-line="82" selection-end-column="14" />
                   <folding>
                     <element signature="e#0#33#0" expanded="true" />
@@ -31,8 +32,8 @@
           <file leaf-file-name="strategy.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/ppdab/strategy.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="403">
-                  <caret line="105" column="28" lean-forward="false" selection-start-line="105" selection-start-column="17" selection-end-line="105" selection-end-column="28" />
+                <state relative-caret-position="327">
+                  <caret line="103" column="19" lean-forward="false" selection-start-line="103" selection-start-column="19" selection-end-line="103" selection-end-column="19" />
                   <folding />
                 </state>
               </provider>
@@ -41,12 +42,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="ppparser.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/ppdab/ppparser.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="339">
-                  <caret line="85" column="18" lean-forward="true" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
+                <state relative-caret-position="-1141">
+                  <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -453,7 +454,6 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14580265" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -467,6 +467,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -704,7 +705,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="524" column="8" lean-forward="false" selection-start-line="524" selection-start-column="8" selection-end-line="524" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -719,7 +719,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -755,7 +754,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="24" column="8" lean-forward="false" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -763,7 +761,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="417">
           <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -771,7 +768,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="39" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -779,7 +775,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
           <caret line="331" column="37" lean-forward="true" selection-start-line="331" selection-start-column="37" selection-end-line="331" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -787,31 +782,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="74" column="8" lean-forward="false" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/ppsdk/detail.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="13691" lean-forward="false" selection-start-line="0" selection-start-column="13691" selection-end-line="0" selection-end-column="13691" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/detail_xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="0" column="1083" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="13691" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ppdab/ppsdk/detail.xml" />
+    <entry file="file://$PROJECT_DIR$/ppdab/detail_xml" />
     <entry file="file://$PROJECT_DIR$/ppdab/test_xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="0" column="452" lean-forward="false" selection-start-line="0" selection-start-column="452" selection-end-line="0" selection-end-column="452" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -819,7 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1870">
           <caret line="0" column="1823" lean-forward="false" selection-start-line="0" selection-start-column="250" selection-end-line="0" selection-end-column="1823" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -827,13 +805,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="31">
           <caret line="8" column="8" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ppdab/ppdkiller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
+        <state relative-caret-position="1394">
           <caret line="82" column="14" lean-forward="false" selection-start-line="82" selection-start-column="14" selection-end-line="82" selection-end-column="14" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
@@ -841,18 +818,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/strategy.py">
+    <entry file="file://$PROJECT_DIR$/ppdab/ppparser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="105" column="28" lean-forward="false" selection-start-line="105" selection-start-column="17" selection-end-line="105" selection-end-column="28" />
+        <state relative-caret-position="-1141">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/ppparser.py">
+    <entry file="file://$PROJECT_DIR$/ppdab/strategy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="85" column="18" lean-forward="true" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
+        <state relative-caret-position="327">
+          <caret line="103" column="19" lean-forward="false" selection-start-line="103" selection-start-column="19" selection-end-line="103" selection-end-column="19" />
           <folding />
         </state>
       </provider>

@@ -1,6 +1,11 @@
 import xml
 
 class PPParser:
+    debug = True
+    @staticmethod
+    def debug_print(words):
+        if PPParser.debug:
+            print(words)
 
     @staticmethod
     def parse_bid_detail_list(xml_string, strategy):
@@ -14,6 +19,7 @@ class PPParser:
             # 剩余可借
             remain = element.getElementsByTagName('RemainFunding')[0].childNodes[0].nodeValue
             if float(remain) <= 0:
+
                 continue
             # 看欠钱是不是太多
             own_amount = element.getElementsByTagName('OwingAmount')[0].childNodes[0].nodeValue
