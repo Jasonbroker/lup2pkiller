@@ -118,6 +118,13 @@ TotalPrincipal Decimal 500.00累计借款金额
 <WasteCount>0</WasteCount>
 
 '''
+from enum import Enum, unique
+
+@unique
+class Gender(Enum):
+    MALE = 1       # 男的
+    FEMALE = 2     # 女的
+    SEXANY = 0     # 任意性别
 
 class Strategy:
 
@@ -125,25 +132,23 @@ class Strategy:
     STRATEGY_BEST_GAIN_16 = 2
     STRATEGY_FEMALE_16 = 3
 
-    MALE = 10       # 男的
-    FEMALE = 11     # 女的
-    SEXANY = 12     # 任意性别
 
-    CreditCodeA = 17
-    CreditCodeB = 18
-    CreditCodeC = 19
-    CreditCodeD = 20
+
+    CreditCodeA = 'A'
+    CreditCodeB = 'B'
+    CreditCodeC = 'C'
+    CreditCodeD = 'D'
 
     def __init__(self, strategy):
         self.phone_validate = 1  # 必须手机认证了，不然说毛线？
         if strategy == Strategy.STRATEGY_SAFE_AA:
             self.max_amount = 10000
-            self.sex = Strategy.SEXANY
+            self.sex = 0
             self.credit = Strategy.CreditCodeA
         elif strategy == Strategy.STRATEGY_BEST_GAIN_16:
             self.max_amount = 6000
             self.min_amount = 1000
-            self.gender = Strategy.FEMALE
+            self.gender = 2
             self.credit = Strategy.CreditCodeC
             self.age_from = 18
             self.age_to = 28

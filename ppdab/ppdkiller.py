@@ -78,12 +78,10 @@ if __name__ == '__main__':
         tmp_ids.append(raw_id)
         if len(tmp_ids) == 10:
             detail_xml = transfer.batch_bid_detail(tmp_ids)
-            print(detail_xml)
             filtered_final_ids = PPParser.parse_bid_detail_list(detail_xml, strategy, final_ids)
             tmp_ids.clear()
     if len(tmp_ids) > 0:
         detail_xml = transfer.batch_bid_detail(tmp_ids)
-        print(detail_xml)
         filtered_final_ids = PPParser.parse_bid_detail_list(detail_xml, strategy, final_ids)
         tmp_ids.clear()
 

@@ -29,13 +29,13 @@ class PPParser:
             gender = element.getElementsByTagName('Gender')[0].childNodes[0].nodeValue
             gender = int(gender)
             if gender != strategy.gender:
-                PPParser.debug_print('gender wrong' + gender)
+                PPParser.debug_print('gender wrong %d' % gender)
                 continue
             # 年龄要求
             age = element.getElementsByTagName('Age')[0].childNodes[0].nodeValue
             age = int(age)
             if age > strategy.age_to or age < strategy.age_from:
-                PPParser.debug_print('own_amount too much: ' + own_amount)
+                PPParser.debug_print('age not right: %d' % age)
                 continue
             # 流标次数
             wastcount = element.getElementsByTagName('WasteCount')[0].childNodes[0].nodeValue
@@ -103,16 +103,23 @@ class PPParser:
                 continue
 
             # 自考，本科，大专，研究生，博士
-            education_degree = element.getElementsByTagName('EducationDegree')[0].childNodes[0].nodeValue
+            education_degrees = element.getElementsByTagName('EducationDegree')[0].childNodes
+            if len(education_degrees) > 0:
+                print(education_degrees)
+                education_degree = education_degrees[0].nodeValue
+                print(education_degree)
+
+
             # 毕业院校，有些学校可能需要排除掉
-            graduate_school = element.getElementsByTagName('GraduateSchool')[0].childNodes[0].nodeValue
-
-
-
-
+            graduate_schools = element.getElementsByTagName('GraduateSchool')[0].childNodes
+            if len(graduate_schools) > 0:
+                graduate_school = graduate_schools.nodeValue
+                print(graduate_school)
 
             listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
             list.append(listingId)
+
+            print('通过评分系统：\n', element.toxml())
         return list
 
     '''
@@ -128,6 +135,10 @@ class PPParser:
 
         filteredElements = []
         for element in loan_infos.childNodes:
+            CreditCode = element.getElementsByTagName('CreditCode')[0].childNodes[0].nodeValue
+            if CreditCode > strategy.credit:
+                PPParser.debug_print('low credit: ' + CreditCode)
+                continue
             # 借款数
             amount = element.getElementsByTagName('Amount')[0].childNodes[0].nodeValue
             amount = float(amount)
@@ -136,7 +147,7 @@ class PPParser:
                 continue
             rate = element.getElementsByTagName('Rate')[0].childNodes[0].nodeValue
 
-            if int(rate) < strategy.mini_rate:
+            if float(rate) < strategy.mini_rate:
                 print('low rate', rate)
                 continue
             listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
