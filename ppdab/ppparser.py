@@ -8,13 +8,12 @@ class PPParser:
             print(words)
 
     @staticmethod
-    def parse_bid_detail_list(xml_string, strategy):
+    def parse_bid_detail_list(xml_string, strategy, list):
         dom = xml.dom.minidom.parseString(xml_string)
         root = dom.documentElement
 
         loan_infos = root.getElementsByTagName("LoanInfos")[0]
 
-        filtered_elements = []
         for element in loan_infos.childNodes:
             # 剩余可借
             remain = element.getElementsByTagName('RemainFunding')[0].childNodes[0].nodeValue
@@ -24,16 +23,19 @@ class PPParser:
             # 看欠钱是不是太多
             own_amount = element.getElementsByTagName('OwingAmount')[0].childNodes[0].nodeValue
             if float(own_amount) > strategy.max_owning:
+                PPParser.debug_print('own_amount too much: ' + own_amount)
                 continue
             # 要求性别
             gender = element.getElementsByTagName('Gender')[0].childNodes[0].nodeValue
             gender = int(gender)
             if gender != strategy.gender:
+                PPParser.debug_print('gender wrong' + gender)
                 continue
             # 年龄要求
             age = element.getElementsByTagName('Age')[0].childNodes[0].nodeValue
             age = int(age)
             if age > strategy.age_to or age < strategy.age_from:
+                PPParser.debug_print('own_amount too much: ' + own_amount)
                 continue
             # 流标次数
             wastcount = element.getElementsByTagName('WasteCount')[0].childNodes[0].nodeValue
@@ -110,8 +112,8 @@ class PPParser:
 
 
             listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
-            filtered_elements.append(listingId)
-        return filtered_elements
+            list.append(listingId)
+        return list
 
     '''
     返回需要继续取得详情的列表
@@ -128,14 +130,16 @@ class PPParser:
         for element in loan_infos.childNodes:
             # 借款数
             amount = element.getElementsByTagName('Amount')[0].childNodes[0].nodeValue
-            print('借款数：' + amount)
             amount = float(amount)
             if amount > strategy.max_amount or amount < strategy.min_amount:
-                print('太贵')
+                print('借款数', amount)
                 continue
+            rate = element.getElementsByTagName('Rate')[0].childNodes[0].nodeValue
 
+            if int(rate) < strategy.mini_rate:
+                print('low rate', rate)
+                continue
             listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
             filteredElements.append(listingId)
-            if len(filteredElements) == 10:
-                break
+        print('ratial = ', len(filteredElements), len(loan_infos.childNodes))
         return filteredElements

@@ -62,7 +62,7 @@ class auto_bit_killer:
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
         list_result = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
-        print(list_result)
+        return list_result
 
 
 
@@ -72,34 +72,23 @@ if __name__ == '__main__':
     strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
     raw_filtered_Ids = PPParser.parse_bid_list(xml_list, strategy)
 
+    final_ids = []
+    tmp_ids = []
+    for raw_id in raw_filtered_Ids:
+        tmp_ids.append(raw_id)
+        if len(tmp_ids) == 10:
+            detail_xml = transfer.batch_bid_detail(tmp_ids)
+            print(detail_xml)
+            filtered_final_ids = PPParser.parse_bid_detail_list(detail_xml, strategy, final_ids)
+            tmp_ids.clear()
+    if len(tmp_ids) > 0:
+        detail_xml = transfer.batch_bid_detail(tmp_ids)
+        print(detail_xml)
+        filtered_final_ids = PPParser.parse_bid_detail_list(detail_xml, strategy, final_ids)
+        tmp_ids.clear()
 
-    # transfer.get_authorize_code()
-    # transfer.authorize()
-    # transfer.bid_list()
-
-    # with open('test_xml', 'r') as f:
-    #     xml_file = f.read()
-    #
-    # strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
-    # listingIds = transfer.parse_bid_list(xml_file, strategy)
-    # # 符合初期预期的listId
-    # print(len(listingIds))
-    # data = {
-    #     "ListingIds": [
-    #         23886149,
-    #         23886150
-    #     ]
-    # }
-    # print(data)
-    # transfer.batch_bid_detail(listingIds)
-
-    # with open('detail.xml', 'r') as f:
-    #     xml_file = f.read()
-    #
-    # strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
-    # listingIds = PPParser.parse_bid_detail_list(xml_file, strategy)
-    # # 符合初期预期的listId
-    # print(len(listingIds))
+    print('最终结果：\n')
+    print(final_ids)
 
 
 

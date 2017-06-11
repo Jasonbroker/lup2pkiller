@@ -146,7 +146,7 @@ class Strategy:
             self.gender = Strategy.FEMALE
             self.credit = Strategy.CreditCodeC
             self.age_from = 18
-            self.age_to = 21
+            self.age_to = 28
             self.mini_rate = 16  # 最小利率
             self.max_owning = 8000  # 最大待还，如果待还数目太多该人风险太高了
             self.certificate_validate = 0  # 是否需要学历认证

@@ -27,9 +27,7 @@ class http_client:
         custom_header = self.REQUEST_HEADER
         for head in headers:
             custom_header[head] = headers[head]
-        print('http_post \n', url, data, custom_header)
         r = self.session.post(url=url, data=data, headers=custom_header)
-        print('http post content:\n', r.content)
         return r.content
             
 
