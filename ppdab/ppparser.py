@@ -19,7 +19,7 @@ class PPParser:
             # 剩余可借
             remain = element.getElementsByTagName('RemainFunding')[0].childNodes[0].nodeValue
             if float(remain) <= 0:
-
+                PPParser.debug_print('remain insuficient: ' + remain)
                 continue
             # 看欠钱是不是太多
             own_amount = element.getElementsByTagName('OwingAmount')[0].childNodes[0].nodeValue
@@ -104,10 +104,6 @@ class PPParser:
             education_degree = element.getElementsByTagName('EducationDegree')[0].childNodes[0].nodeValue
             # 毕业院校，有些学校可能需要排除掉
             graduate_school = element.getElementsByTagName('GraduateSchool')[0].childNodes[0].nodeValue
-
-
-
-
 
 
 

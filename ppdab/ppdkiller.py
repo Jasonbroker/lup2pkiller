@@ -39,6 +39,7 @@ class auto_bit_killer:
         print(authorizeStr)
 
     access_token = '6a58ad4d-561c-4ad9-8ce5-648450e009c8'
+
     # 获取散标列表
     def bid_list(self):
         url = 'http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList'
@@ -49,8 +50,7 @@ class auto_bit_killer:
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
         xmldata = self.client.send(url=url, data=data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
-        print('xml data', xmldata)
-
+        return xmldata
 
     '''detail bids'''
     def batch_bid_detail(self, listing_ids):
@@ -68,6 +68,10 @@ class auto_bit_killer:
 
 if __name__ == '__main__':
     transfer = auto_bit_killer()
+    xml_list = transfer.bid_list()
+    strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
+    raw_filtered_Ids = PPParser.parse_bid_list(xml_list, strategy)
+
 
     # transfer.get_authorize_code()
     # transfer.authorize()
@@ -89,13 +93,13 @@ if __name__ == '__main__':
     # print(data)
     # transfer.batch_bid_detail(listingIds)
 
-    with open('detail.xml', 'r') as f:
-        xml_file = f.read()
-
-    strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
-    listingIds = PPParser.parse_bid_detail_list(xml_file, strategy)
-    # 符合初期预期的listId
-    print(len(listingIds))
+    # with open('detail.xml', 'r') as f:
+    #     xml_file = f.read()
+    #
+    # strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
+    # listingIds = PPParser.parse_bid_detail_list(xml_file, strategy)
+    # # 符合初期预期的listId
+    # print(len(listingIds))
 
 
 
