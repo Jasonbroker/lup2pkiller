@@ -116,6 +116,9 @@ class PPParser:
                 graduate_school = graduate_schools.nodeValue
                 print(graduate_school)
 
+            # 教育形式是自考的需要排除掉
+
+
             listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
             list.append(listingId)
 

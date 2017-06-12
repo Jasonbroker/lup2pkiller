@@ -118,21 +118,11 @@ TotalPrincipal Decimal 500.00累计借款金额
 <WasteCount>0</WasteCount>
 
 '''
-from enum import Enum, unique
-
-@unique
-class Gender(Enum):
-    MALE = 1       # 男的
-    FEMALE = 2     # 女的
-    SEXANY = 0     # 任意性别
-
 class Strategy:
 
     STRATEGY_SAFE_AA = 1
     STRATEGY_BEST_GAIN_16 = 2
     STRATEGY_FEMALE_16 = 3
-
-
 
     CreditCodeA = 'A'
     CreditCodeB = 'B'
