@@ -118,6 +118,7 @@ TotalPrincipal Decimal 500.00累计借款金额
 <WasteCount>0</WasteCount>
 
 '''
+# todo 根据官方论坛的大数据分析写策略
 class Strategy:
 
     STRATEGY_SAFE_AA = 1
