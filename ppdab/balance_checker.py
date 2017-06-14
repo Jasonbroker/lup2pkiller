@@ -82,10 +82,11 @@ class balance_checker:
     def checkBalance(self):
         earn = transfer._checkBalance()
         if earn > 0:
-            msg = 'earn %f' % earn
+            msg = '余额更新%f，先余额%f' % (earn, self.balance)
             os.system('terminal-notifier -title "拍拍贷" -message "%s"' % msg)
+            transfer.send_notification(msg)
 
-    def send_notification(self):
+    def send_notification(self, notification):
         url = 'https://restapi.getui.com/v1/' + self.getuiappid + '/auth_sign'
         print(url)
         ts = int(time.time()*1000)
@@ -100,8 +101,45 @@ class balance_checker:
         header = {'Content-Type': 'application/json'}
         print(data)
         r = self.session.post(url, data=json.dumps(data), headers=header)
-        token = r.json()
-        print(r.json())
+        dic = r.json()
+        if dic['result'] == 'ok':
+            token = dic['auth_token']
+        else:
+            return None
+
+        noti_header = {
+                        'Content-Type': 'application/json',
+                        'authtoken': token
+                       }
+        noti_url = 'https://restapi.getui.com/v1/' + self.getuiappid + '/push_single'
+        noti_data = {
+            "message": {
+                "appkey": self.getuiappkey,
+                "is_offline": True,
+                "offline_expire_time": 10000000,
+                "msgtype": "transmission"
+            },
+            "transmission": {
+                "transmission_type": False,
+                "transmission_content": "this is the transmission_content",
+                "duration_begin": "2017-03-22 11:40:00",
+                "duration_end": "2017-03-29 11:40:00"
+            },
+            "push_info": {
+                "aps": {
+                    "alert": {
+                        "title": "拍拍贷余额更新",
+                        "body": notification
+                    },
+                    "content-available": 1
+                },
+            },
+            "alias": "zz",
+            "requestid": "12111111111111111111111"
+        }
+        noti_r = self.session.post(noti_url, data=json.dumps(noti_data), headers=noti_header)
+        dic = noti_r.json()
+        print(dic)
 
 
 
@@ -114,8 +152,6 @@ if __name__ == '__main__':
 
 
     transfer = balance_checker()
-    transfer.send_notification()
-
     # while True:
     #     schedule.enter(60*10, 0, transfer.checkBalance)
     #     schedule.run()
