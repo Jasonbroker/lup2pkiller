@@ -2,6 +2,11 @@ import ppsdk.openapi_client
 from ppsdk.core import rsa_client
 import xml.dom.minidom
 import os
+import sched
+import time
+import hashlib
+import requests
+import json
 
 class balance_checker:
     APPID = '2f9f35c5c24e4968849d7bfa1fe9fbf3'
@@ -14,13 +19,19 @@ class balance_checker:
 
     returnUrl2 = 'http://www.zhouzhengchang.com'
 
+    getuiappkey = 'jlsU5w2htZ7fRr3LCy0Mj8'
+    getuiappid = 'M94TY2pmnn8g8VIPEWO808'
+    mastersecret = 'BfWtyenXl86AwlL75kafJ'
+
+
     def __init__(self):
         with open('./private.txt', 'r') as f:
            self.APPSECRET = f.read()
         self.client = ppsdk.openapi_client.openapi_client(self.APPSECRET)
+        self.session = requests.session()
         with open('balance', 'r') as f:
             self.balance = float(f.read())
-            print('current balance %f' % self.balance)
+            print('init balance %f' % self.balance)
         pass
 
     def get_authorize_code(self):
@@ -37,7 +48,7 @@ class balance_checker:
     access_token = '2135b713-c892-4d2c-8f7b-1c37dbef97a2'
     RefreshToken = "e3a0ca1e-b10c-448a-be46-0206b6ee870f"
 
-    def checkBalance(self):
+    def _checkBalance(self):
         # "
         url = 'http://gw.open.ppdai.com/balance/balanceService/QueryBalance'
         data = {}
@@ -54,7 +65,6 @@ class balance_checker:
         with open('balance', 'w') as f:
             f.write(str(self.balance))
             print('current balance %f' % self.balance)
-        print(earn)
         return earn
 
 
@@ -69,15 +79,47 @@ class balance_checker:
         r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
         return r
 
+    def checkBalance(self):
+        earn = transfer._checkBalance()
+        if earn > 0:
+            msg = 'earn %f' % earn
+            os.system('terminal-notifier -title "拍拍贷" -message "%s"' % msg)
+
+    def send_notification(self):
+        url = 'https://restapi.getui.com/v1/' + self.getuiappid + '/auth_sign'
+        print(url)
+        ts = int(time.time()*1000)
+        sign = hashlib.sha256((self.getuiappkey + str(ts) + self.mastersecret).encode())
+        sign = sign.hexdigest()
+        print(sign)
+        data = {
+            'sign': sign,
+            'timestamp': str(ts),
+            'appkey': self.getuiappkey
+        }
+        header = {'Content-Type': 'application/json'}
+        print(data)
+        r = self.session.post(url, data=json.dumps(data), headers=header)
+        token = r.json()
+        print(r.json())
+
+
 
 
 if __name__ == '__main__':
-    transfer = balance_checker()
+    schedule = sched.scheduler(time.time, time.sleep)
+
     # transfer.get_authorize_code()
     # transfer.authorize()
-    earn = transfer.checkBalance()
-    msg = 'earn %f' % earn
-    os.system('terminal-notifier -title "拍拍贷" -message "%s"' % earn)
+
+
+    transfer = balance_checker()
+    transfer.send_notification()
+
+    # while True:
+    #     schedule.enter(60*10, 0, transfer.checkBalance)
+    #     schedule.run()
+
 
 
 

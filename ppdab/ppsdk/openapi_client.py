@@ -75,7 +75,9 @@ class openapi_client:
     def send(self, url, data, appid, sign, accesstoken=''):
         utctime = datetime.datetime.utcnow()
         timestamp = utctime.strftime('%Y-%m-%d %H:%M:%S')
-        headers = {"X-PPD-APPID": appid,
+        headers = {
+                    'Accept': 'application/json',
+                    "X-PPD-APPID": appid,
                    "X-PPD-SIGN": sign,
                    "X-PPD-TIMESTAMP": timestamp,
                    "X-PPD-TIMESTAMP-SIGN": rsa_client.sign("%s%s" % (appid, timestamp), self.private_key)}

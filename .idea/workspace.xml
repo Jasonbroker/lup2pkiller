@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eae192b4-9e9e-456d-8a16-0f7024386559" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ppdab/balance" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ppsdk/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ppsdk/core/Global.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ppsdk/core/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ppsdk/core/pphttpclient.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ppsdk/core/rsa_client.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ppsdk/openapi_client.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/balance_checker.py" afterPath="$PROJECT_DIR$/ppdab/balance_checker.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/ppdkiller.py" afterPath="$PROJECT_DIR$/ppdab/ppdkiller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py" afterPath="$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,7 +20,7 @@
       <file leaf-file-name="ppparser.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ppdab/ppparser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="65">
+            <state relative-caret-position="710">
               <caret line="140" column="94" lean-forward="false" selection-start-line="140" selection-start-column="71" selection-end-line="140" selection-end-column="94" />
               <folding />
             </state>
@@ -35,8 +30,8 @@
       <file leaf-file-name="ppdkiller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ppdab/ppdkiller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="65" column="26" lean-forward="false" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
+            <state relative-caret-position="208">
+              <caret line="74" column="18" lean-forward="false" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -47,8 +42,8 @@
       <file leaf-file-name="balance_checker.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ppdab/balance_checker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-159">
-              <caret line="56" column="19" lean-forward="true" selection-start-line="56" selection-start-column="19" selection-end-line="56" selection-end-column="19" />
+            <state relative-caret-position="305">
+              <caret line="102" column="24" lean-forward="false" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -143,11 +138,11 @@
         <option value="$PROJECT_DIR$/ppdab/ppparser.py" />
         <option value="$PROJECT_DIR$/ppdab/strategy.py" />
         <option value="$PROJECT_DIR$/ppdab/ppsdk/core/rsa_client.py" />
+        <option value="$PROJECT_DIR$/ppdab/__init__py.py" />
+        <option value="$PROJECT_DIR$/ppdab/balance" />
         <option value="$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py" />
         <option value="$PROJECT_DIR$/ppdab/ppdkiller.py" />
-        <option value="$PROJECT_DIR$/ppdab/__init__py.py" />
         <option value="$PROJECT_DIR$/ppdab/balance_checker.py" />
-        <option value="$PROJECT_DIR$/ppdab/balance" />
       </list>
     </option>
   </component>
@@ -232,6 +227,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ppdab" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lup2pkiller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lup2pkiller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ppdab" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ppsdk" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -526,20 +539,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/http/cookies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="482" column="6" lean-forward="false" selection-start-line="482" selection-start-column="6" selection-end-line="482" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/requests/cookies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="389" column="32" lean-forward="true" selection-start-line="389" selection-start-column="22" selection-end-line="389" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/http/cookiejar.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-618">
@@ -802,32 +801,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="47" column="38" lean-forward="false" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/ppdkiller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="65" column="26" lean-forward="false" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/ppparser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="140" column="94" lean-forward="false" selection-start-line="140" selection-start-column="71" selection-end-line="140" selection-end-column="94" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ppdab/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -868,10 +841,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/sched.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="81" column="8" lean-forward="false" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/hashlib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ppdab/ppparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="710">
+          <caret line="140" column="94" lean-forward="false" selection-start-line="140" selection-start-column="71" selection-end-line="140" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="84" column="14" lean-forward="false" selection-start-line="84" selection-start-column="14" selection-end-line="84" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ppdab/ppdkiller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="74" column="18" lean-forward="false" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ppdab/balance_checker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-159">
-          <caret line="56" column="19" lean-forward="true" selection-start-line="56" selection-start-column="19" selection-end-line="56" selection-end-column="19" />
+        <state relative-caret-position="305">
+          <caret line="102" column="24" lean-forward="false" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>

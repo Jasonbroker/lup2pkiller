@@ -70,9 +70,9 @@ if __name__ == '__main__':
     # transfer.checkBalance()
     # transfer.get_authorize_code()
     # transfer.authorize()
-    transfer.checkBalance()
 
-    # xml_list = transfer.bid_list()
+    xml_list = transfer.bid_list()
+    print(xml_list)
     # strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
     # raw_filtered_Ids = PPParser.parse_bid_list(xml_list, strategy)
     #
