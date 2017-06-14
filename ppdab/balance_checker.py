@@ -29,6 +29,8 @@ class balance_checker:
            self.APPSECRET = f.read()
         self.client = ppsdk.openapi_client.openapi_client(self.APPSECRET)
         self.session = requests.session()
+        self.runtime = time.time()
+        self.noti_token = ''
         with open('balance', 'r') as f:
             self.balance = float(f.read())
             print('init balance %f' % self.balance)
@@ -86,7 +88,7 @@ class balance_checker:
             os.system('terminal-notifier -title "拍拍贷" -message "%s"' % msg)
             transfer.send_notification(msg)
 
-    def send_notification(self, notification):
+    def get_notification_token(self):
         url = 'https://restapi.getui.com/v1/' + self.getuiappid + '/auth_sign'
         print(url)
         ts = int(time.time()*1000)
@@ -105,12 +107,23 @@ class balance_checker:
         if dic['result'] == 'ok':
             token = dic['auth_token']
         else:
-            return None
+            token = ''
+        return token
 
+    def send_notification(self, notification):
+        # 需要重新找token
+        if self.noti_token == '' or time.time() - self.runtime > 24 * 3600:
+            self.noti_token = self.get_notification_token()
+            self._send_notification('拍拍贷监控开始')
+
+        if self.noti_token != '':
+            self._send_notification(notification)
+
+    def _send_notification(self, notification):
         noti_header = {
-                        'Content-Type': 'application/json',
-                        'authtoken': token
-                       }
+            'Content-Type': 'application/json',
+            'authtoken': self.noti_token
+        }
         noti_url = 'https://restapi.getui.com/v1/' + self.getuiappid + '/push_single'
         noti_data = {
             "message": {
@@ -152,9 +165,9 @@ if __name__ == '__main__':
 
 
     transfer = balance_checker()
-    # while True:
-    #     schedule.enter(60*10, 0, transfer.checkBalance)
-    #     schedule.run()
+    while True:
+        schedule.enter(60*10, 0, transfer.checkBalance)
+        schedule.run()
 
 
 
