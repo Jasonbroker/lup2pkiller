@@ -51,22 +51,23 @@ class balance_checker:
     RefreshToken = "e3a0ca1e-b10c-448a-be46-0206b6ee870f"
 
     def _checkBalance(self):
-        # "
         url = 'http://gw.open.ppdai.com/balance/balanceService/QueryBalance'
         data = {}
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
-        r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
-        dom = xml.dom.minidom.parseString(r)
-        root = dom.documentElement
-        loan_infos = root.getElementsByTagName("d2p1:Balance")
-        balance = float(loan_infos[1].childNodes[0].nodeValue)
-        earn = balance - self.balance
-        if earn > 0 and self.balance >= 0:
-            self.balance = balance
-        with open('balance', 'w') as f:
-            f.write(str(self.balance))
-            print('current balance %f' % self.balance)
+        r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token)
+        dic = json.loads(r.decode())
+        if dic['Result'] == 0:
+            balance = float(dic['Balance'][1]['Balance'])
+            print('balance %f' % balance)
+            earn = balance - self.balance
+            if earn > 0 and self.balance >= 0:
+                self.balance = balance
+            with open('balance', 'w') as f:
+                f.write(str(self.balance))
+                print('current balance %f' % self.balance)
+        else:
+            earn = 0
         return earn
 
 
@@ -84,7 +85,7 @@ class balance_checker:
     def checkBalance(self):
         earn = transfer._checkBalance()
         if earn > 0:
-            msg = '余额更新%f，先余额%f' % (earn, self.balance)
+            msg = '余额更新%f，现余额%f' % (earn, self.balance)
             os.system('terminal-notifier -title "拍拍贷" -message "%s"' % msg)
             transfer.send_notification(msg)
 
@@ -114,6 +115,7 @@ class balance_checker:
         # 需要重新找token
         if self.noti_token == '' or time.time() - self.runtime > 24 * 3600:
             self.noti_token = self.get_notification_token()
+            print('拍拍贷监控开始')
             self._send_notification('拍拍贷监控开始')
 
         if self.noti_token != '':
@@ -148,7 +150,7 @@ class balance_checker:
                 },
             },
             "alias": "zz",
-            "requestid": "12111111111111111111111"
+            "requestid": str(time.time()*1000)
         }
         noti_r = self.session.post(noti_url, data=json.dumps(noti_data), headers=noti_header)
         dic = noti_r.json()
@@ -162,15 +164,11 @@ if __name__ == '__main__':
 
     # transfer.get_authorize_code()
     # transfer.authorize()
-
-
     transfer = balance_checker()
     while True:
+        # 十分钟一检查
         schedule.enter(60*10, 0, transfer.checkBalance)
         schedule.run()
-
-
-
 
 
 

@@ -76,7 +76,6 @@ class openapi_client:
         utctime = datetime.datetime.utcnow()
         timestamp = utctime.strftime('%Y-%m-%d %H:%M:%S')
         headers = {
-                    'Accept': 'application/json',
                     "X-PPD-APPID": appid,
                    "X-PPD-SIGN": sign,
                    "X-PPD-TIMESTAMP": timestamp,

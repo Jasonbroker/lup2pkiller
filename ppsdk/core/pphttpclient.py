@@ -28,6 +28,6 @@ class http_client:
         for head in headers:
             custom_header[head] = headers[head]
         r = self.session.post(url=url, data=data, headers=custom_header)
-        return r.content
+        return r
             
 
