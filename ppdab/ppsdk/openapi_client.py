@@ -75,16 +75,10 @@ class openapi_client:
     def send(self, url, data, appid, sign, accesstoken=''):
         utctime = datetime.datetime.utcnow()
         timestamp = utctime.strftime('%Y-%m-%d %H:%M:%S')
-        '''
         headers = {"X-PPD-APPID": appid,
-                   "X-PPD-SIGN": str(sign),
+                   "X-PPD-SIGN": sign,
                    "X-PPD-TIMESTAMP": timestamp,
-                   "X-PPD-TIMESTAMP-SIGN": str(rsa_client.sign("%s%s" % (appid, timestamp), self.private_key))}
-        '''
-        headers = {"X-PPD-APPID": appid,
-                   "X-PPD-SIGN": sign.decode(),
-                   "X-PPD-TIMESTAMP": timestamp,
-                   "X-PPD-TIMESTAMP-SIGN": rsa_client.sign("%s%s" % (appid, timestamp), self.private_key).decode()}
+                   "X-PPD-TIMESTAMP-SIGN": rsa_client.sign("%s%s" % (appid, timestamp), self.private_key)}
 
         data = json.dumps(data).lower()
 
@@ -93,6 +87,5 @@ class openapi_client:
         # data = data.lower()
         result = self.http_client.http_post(url, data, headers=headers)
         return result
-        
         
         

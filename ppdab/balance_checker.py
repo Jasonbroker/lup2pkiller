@@ -2,6 +2,7 @@ import ppdab.ppsdk.openapi_client
 from requests.utils import quote
 from ppdab.ppsdk.core import rsa_client
 import xml.dom.minidom
+import os
 from ppdab.strategy import Strategy
 from ppdab.ppparser import PPParser
 
@@ -10,7 +11,7 @@ import rsa
 
 
 
-class auto_bit_killer:
+class balance_checker:
     APPID = '2f9f35c5c24e4968849d7bfa1fe9fbf3'
     appid2 = 'c2be1f8150b24544a373644cc4d65932'
 
@@ -25,6 +26,7 @@ class auto_bit_killer:
         with open('./private.txt', 'r') as f:
            self.APPSECRET = f.read()
         self.client = ppdab.ppsdk.openapi_client.openapi_client(self.APPSECRET)
+        self.balance = 0
         pass
 
     def get_authorize_code(self):
@@ -41,56 +43,47 @@ class auto_bit_killer:
     access_token = '2135b713-c892-4d2c-8f7b-1c37dbef97a2'
     RefreshToken = "e3a0ca1e-b10c-448a-be46-0206b6ee870f"
 
-    # 获取散标列表
-    def bid_list(self):
-        url = 'http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList'
-        data = {'PageIndex': 1}
-
-        # data = {"timestamp":utctime.strftime('%Y-%m-%d %H:%M:%S')}#time.strftime('%Y-%m-%d %H:%M:%S',)
-        # data = { "AccountName": "15200000001"}
+    def checkBalance(self):
+        # "
+        url = 'http://gw.open.ppdai.com/balance/balanceService/QueryBalance'
+        data = {}
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
-        xmldata = self.client.send(url=url, data=data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
-        return xmldata
+        print(sign)
+        r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
+        print(r)
+        dom = xml.dom.minidom.parseString(r)
+        root = dom.documentElement
+        loan_infos = root.getElementsByTagName("d2p1:Balance")
+        balance = float(loan_infos[1].childNodes[0].nodeValue)
+        earn = balance - self.balance
+        if earn > 0 and self.balance >= 0:
+            self.balance = balance
+        print(earn)
+        return earn
 
-    '''detail bids'''
-    def batch_bid_detail(self, listing_ids):
-        # 新版散标详情批量接口（请求列表不大于10）
-        url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingInfos"
+
+    def checpayback(self, id):
+        url = 'http://gw.open.ppdai.com/invest/RepaymentService/FetchLenderRepayment'
         data = {
-            "ListingIds": listing_ids
+            'ListingId': id
         }
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
-        list_result = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
-        return list_result
+        print(sign)
+        r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
+        return r
+
+
 
 if __name__ == '__main__':
-    transfer = auto_bit_killer()
-    # transfer.checkBalance()
+    transfer = balance_checker()
     # transfer.get_authorize_code()
     # transfer.authorize()
-    transfer.checkBalance()
+    earn = transfer.checkBalance()
+    msg = 'earn %f' % earn
+    os.system('terminal-notifier -title "拍拍贷" -message "%s"' % earn)
 
-    # xml_list = transfer.bid_list()
-    # strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
-    # raw_filtered_Ids = PPParser.parse_bid_list(xml_list, strategy)
-    #
-    # final_ids = []
-    # tmp_ids = []
-    # for raw_id in raw_filtered_Ids:
-    #     tmp_ids.append(raw_id)
-    #     if len(tmp_ids) == 10:
-    #         detail_xml = transfer.batch_bid_detail(tmp_ids)
-    #         filtered_final_ids = PPParser.parse_bid_detail_list(detail_xml, strategy, final_ids)
-    #         tmp_ids.clear()
-    # if len(tmp_ids) > 0:
-    #     detail_xml = transfer.batch_bid_detail(tmp_ids)
-    #     filtered_final_ids = PPParser.parse_bid_detail_list(detail_xml, strategy, final_ids)
-    #     tmp_ids.clear()
-    #
-    # print('最终结果：\n')
-    # print(final_ids)
 
 
 

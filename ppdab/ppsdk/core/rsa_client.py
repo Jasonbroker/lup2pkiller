@@ -24,7 +24,7 @@ class rsa_client:
         pkcs1 = rsa.PrivateKey.load_pkcs1(privatekey)
         signature = base64.b64encode(rsa.sign(signdata.encode(), pkcs1, 'SHA-1'))
 
-        return signature
+        return signature.decode()
 #
 
     @staticmethod
