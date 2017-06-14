@@ -157,8 +157,6 @@ class balance_checker:
         print(dic)
 
 
-
-
 if __name__ == '__main__':
     schedule = sched.scheduler(time.time, time.sleep)
 
