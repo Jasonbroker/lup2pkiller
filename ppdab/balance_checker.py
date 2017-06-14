@@ -1,15 +1,7 @@
-import ppdab.ppsdk.openapi_client
-from requests.utils import quote
-from ppdab.ppsdk.core import rsa_client
+import ppsdk.openapi_client
+from ppsdk.core import rsa_client
 import xml.dom.minidom
 import os
-from ppdab.strategy import Strategy
-from ppdab.ppparser import PPParser
-
-import rsa
-# some consts for ppd
-
-
 
 class balance_checker:
     APPID = '2f9f35c5c24e4968849d7bfa1fe9fbf3'
@@ -25,8 +17,10 @@ class balance_checker:
     def __init__(self):
         with open('./private.txt', 'r') as f:
            self.APPSECRET = f.read()
-        self.client = ppdab.ppsdk.openapi_client.openapi_client(self.APPSECRET)
-        self.balance = 0
+        self.client = ppsdk.openapi_client.openapi_client(self.APPSECRET)
+        with open('balance', 'r') as f:
+            self.balance = float(f.read())
+            print('current balance %f' % self.balance)
         pass
 
     def get_authorize_code(self):
@@ -49,9 +43,7 @@ class balance_checker:
         data = {}
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
-        print(sign)
         r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
-        print(r)
         dom = xml.dom.minidom.parseString(r)
         root = dom.documentElement
         loan_infos = root.getElementsByTagName("d2p1:Balance")
@@ -59,6 +51,9 @@ class balance_checker:
         earn = balance - self.balance
         if earn > 0 and self.balance >= 0:
             self.balance = balance
+        with open('balance', 'w') as f:
+            f.write(str(self.balance))
+            print('current balance %f' % self.balance)
         print(earn)
         return earn
 
