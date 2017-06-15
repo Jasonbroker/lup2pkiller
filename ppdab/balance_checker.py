@@ -61,7 +61,7 @@ class balance_checker:
             balance = float(dic['Balance'][1]['Balance'])
             print('balance %f' % balance)
             earn = balance - self.balance
-            if earn > 0 and self.balance >= 0:
+            if self.balance >= 0:
                 self.balance = balance
             with open('balance', 'w') as f:
                 f.write(str(self.balance))
@@ -84,7 +84,7 @@ class balance_checker:
 
     def checkBalance(self):
         earn = transfer._checkBalance()
-        if earn > 0:
+        if earn != 0:
             msg = '余额更新%f，现余额%f' % (earn, self.balance)
             os.system('terminal-notifier -title "拍拍贷" -message "%s"' % msg)
             transfer.send_notification(msg)
@@ -163,6 +163,7 @@ if __name__ == '__main__':
     # transfer.get_authorize_code()
     # transfer.authorize()
     transfer = balance_checker()
+    transfer.checkBalance()
     while True:
         # 十分钟一检查
         schedule.enter(60*10, 0, transfer.checkBalance)
