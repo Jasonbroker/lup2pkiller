@@ -116,6 +116,7 @@ class balance_checker:
         if self.noti_token == '' or time.time() - self.runtime > 24 * 3600:
             self.noti_token = self.get_notification_token()
             print('拍拍贷监控开始')
+            self.runtime = time.time()
             self._send_notification('拍拍贷监控开始')
 
         if self.noti_token != '':
