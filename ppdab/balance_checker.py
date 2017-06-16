@@ -1,6 +1,5 @@
 import ppsdk.openapi_client
 from ppsdk.core import rsa_client
-import xml.dom.minidom
 import os
 import sched
 import time
@@ -56,7 +55,7 @@ class balance_checker:
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
         r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token)
-        dic = json.loads(r.decode())
+        dic = r.json()
         if dic['Result'] == 0:
             balance = float(dic['Balance'][1]['Balance'])
             print('balance %f' % balance)
@@ -69,7 +68,6 @@ class balance_checker:
         else:
             earn = 0
         return earn
-
 
     def checpayback(self, id):
         url = 'http://gw.open.ppdai.com/invest/RepaymentService/FetchLenderRepayment'
@@ -167,7 +165,7 @@ if __name__ == '__main__':
     transfer.checkBalance()
     while True:
         # 十分钟一检查
-        schedule.enter(60*10, 0, transfer.checkBalance)
+        schedule.enter(60*5, 0, transfer.checkBalance)
         schedule.run()
 
 
