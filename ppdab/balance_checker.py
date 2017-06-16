@@ -6,6 +6,7 @@ import time
 import hashlib
 import requests
 import json
+import datetime
 
 class balance_checker:
     APPID = '2f9f35c5c24e4968849d7bfa1fe9fbf3'
@@ -58,13 +59,13 @@ class balance_checker:
         dic = r.json()
         if dic['Result'] == 0:
             balance = float(dic['Balance'][1]['Balance'])
-            print('balance %f' % balance)
             earn = balance - self.balance
             if self.balance >= 0:
                 self.balance = balance
             with open('balance', 'w') as f:
                 f.write(str(self.balance))
-                print('current balance %f' % self.balance)
+                utctime = datetime.datetime.utcnow()
+                print('%s current balance %f' %(utctime.strftime('%Y-%m-%d %H:%M:%S'), self.balance))
         else:
             earn = 0
         return earn
