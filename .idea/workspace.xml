@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eae192b4-9e9e-456d-8a16-0f7024386559" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/balance" afterPath="$PROJECT_DIR$/ppdab/balance" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,8 +39,8 @@
       <file leaf-file-name="balance_checker.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ppdab/balance_checker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="67" column="101" lean-forward="true" selection-start-line="67" selection-start-column="101" selection-end-line="67" selection-end-column="101" />
+            <state relative-caret-position="316">
+              <caret line="73" column="82" lean-forward="false" selection-start-line="73" selection-start-column="82" selection-end-line="73" selection-end-column="82" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -53,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="322">
-              <caret line="87" column="38" lean-forward="true" selection-start-line="87" selection-start-column="38" selection-end-line="87" selection-end-column="38" />
+              <caret line="87" column="38" lean-forward="false" selection-start-line="87" selection-start-column="38" selection-end-line="87" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -121,6 +120,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/ppdab/ppparser.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ppdab/balance_checker.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -867,7 +867,7 @@
     <entry file="file://$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
-          <caret line="87" column="38" lean-forward="true" selection-start-line="87" selection-start-column="38" selection-end-line="87" selection-end-column="38" />
+          <caret line="87" column="38" lean-forward="false" selection-start-line="87" selection-start-column="38" selection-end-line="87" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -908,8 +908,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ppdab/balance_checker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="67" column="101" lean-forward="true" selection-start-line="67" selection-start-column="101" selection-end-line="67" selection-end-column="101" />
+        <state relative-caret-position="316">
+          <caret line="73" column="82" lean-forward="false" selection-start-line="73" selection-start-column="82" selection-end-line="73" selection-end-column="82" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
