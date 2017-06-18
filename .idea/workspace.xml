@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="eae192b4-9e9e-456d-8a16-0f7024386559" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/balance" afterPath="$PROJECT_DIR$/ppdab/balance" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,8 +40,8 @@
       <file leaf-file-name="balance_checker.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ppdab/balance_checker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="73" column="82" lean-forward="false" selection-start-line="73" selection-start-column="82" selection-end-line="73" selection-end-column="82" />
+            <state relative-caret-position="146">
+              <caret line="114" column="50" lean-forward="true" selection-start-line="114" selection-start-column="50" selection-end-line="114" selection-end-column="50" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -908,8 +909,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ppdab/balance_checker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="73" column="82" lean-forward="false" selection-start-line="73" selection-start-column="82" selection-end-line="73" selection-end-column="82" />
+        <state relative-caret-position="146">
+          <caret line="114" column="50" lean-forward="true" selection-start-line="114" selection-start-column="50" selection-end-line="114" selection-end-column="50" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
