@@ -42,13 +42,22 @@ class balance_checker:
         authorize_url2 = 'https://ac.ppdai.com/oauth2/login?AppID=' + self.appid2 + '&ReturnUrl=' + self.returnUrl2
         print(authorize_url2)
 
-    def authorize(self):
-        code = 'e3a5d899ffd04925a201c8d0823edff4'
-        authorizeStr = self.client.authorize(appid=self.APPID, code=code)
-        print(authorizeStr.decode())
-
-    access_token = '2135b713-c892-4d2c-8f7b-1c37dbef97a2'
+    access_token = '86f933f2-1e7b-45ed-a336-9ac3c41e1f92'
     RefreshToken = "e3a0ca1e-b10c-448a-be46-0206b6ee870f"
+    openID = '01a1a1337577473cb9c1650f79f31728'
+    # authorize_data: {"OpenID": "01a1a1337577473cb9c1650f79f31728",
+    #                  "AccessToken": "48f6ec50-2917-4ab0-8d97-6c0d76917af9",
+    #                  "RefreshToken": "b8471d4e-3a5a-492c-b678-e638715ce536", "ExpiresIn": 604800}
+
+    def authorize(self):
+        code = 'cb5857ce8b674070a30503ba7feb816a'
+        authorizeStr = self.client.authorize(appid=self.APPID, code=code)
+        print(authorizeStr)
+
+    def refreshToken(self):
+        new_token_info = self.client.refresh_token(self.APPID, self.openID, self.RefreshToken)
+        print(new_token_info.content)
+
 
     def _checkBalance(self):
         url = 'http://gw.open.ppdai.com/balance/balanceService/QueryBalance'
@@ -57,6 +66,11 @@ class balance_checker:
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
         r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token)
         dic = r.json()
+        print(dic)
+        if dic['ResultMessage']:
+            self.refreshToken()
+            self.checkBalance()
+        print(dic)
         if dic['Result'] == 0:
             balance = float(dic['Balance'][1]['Balance'])
             earn = balance - self.balance
@@ -159,16 +173,15 @@ class balance_checker:
 
 if __name__ == '__main__':
     schedule = sched.scheduler(time.time, time.sleep)
-
+    transfer = balance_checker()
     # transfer.get_authorize_code()
     # transfer.authorize()
-    transfer = balance_checker()
+    # transfer.refreshToken()
     transfer.checkBalance()
     while True:
         # 十分钟一检查
         schedule.enter(60*5, 0, transfer.checkBalance)
         schedule.run()
-
 
 
 

@@ -38,17 +38,16 @@ class openapi_client:
     code 授权码
     '''
     def authorize(self, appid, code):
-        data = {
-            'AppID': appid,
-            'Code': code
-        }
+        # audata = {
+        #     'AppID': appid,
+        #     'Code': code
+        # }
         data = "{\"AppID\":\"%s\",\"Code\":\"%s\"}" % (appid, code)
-        data = data.encode("utf-8")
-        print('authorize data: ', data)
+        # data = data.encode("utf-8")
         result = self.http_client.http_post(openapi_client.AUTHORIZE_URL, data=data)
         # result = gzip.GzipFile(fileobj=StringIO.StringIO(result),mode="r")
         # result = result.read().decode("gbk").encode("utf-8")
-        print("authorize_data:%s" % (result))
+        print("authorize_data: %s" % (result.content.decode()))
         return result
         
     '''

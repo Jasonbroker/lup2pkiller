@@ -44,7 +44,6 @@ class openapi_client:
         }
         data = "{\"AppID\":\"%s\",\"Code\":\"%s\"}" % (appid, code)
         data = data.encode("utf-8")
-        print('authorize data: ', data)
         result = self.http_client.http_post(openapi_client.AUTHORIZE_URL, data=data)
         # result = gzip.GzipFile(fileobj=StringIO.StringIO(result),mode="r")
         # result = result.read().decode("gbk").encode("utf-8")
