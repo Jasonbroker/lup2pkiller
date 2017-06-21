@@ -131,7 +131,7 @@ class balance_checker:
             "message": {
                 "appkey": self.getuiappkey,
                 "is_offline": True,
-                "offline_expire_time": 10000000,
+                "offline_expire_time": 1,
                 "msgtype": "transmission"
             },
             "transmission": {
@@ -146,7 +146,7 @@ class balance_checker:
                         "title": "拍拍贷余额更新",
                         "body": notification
                     },
-                    "content-available": 1
+                    'sound':'default',
                 },
             },
             "alias": "zz",
