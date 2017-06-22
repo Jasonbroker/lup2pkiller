@@ -66,11 +66,9 @@ class balance_checker:
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
         r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token)
         dic = r.json()
-        print(dic)
         if dic['ResultMessage']:
             self.refreshToken()
             self.checkBalance()
-        print(dic)
         if dic['Result'] == 0:
             balance = float(dic['Balance'][1]['Balance'])
             earn = balance - self.balance
