@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eae192b4-9e9e-456d-8a16-0f7024386559" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/balance" afterPath="$PROJECT_DIR$/ppdab/balance" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/balance_checker.py" afterPath="$PROJECT_DIR$/ppdab/balance_checker.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py" afterPath="$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppsdk/core/pphttpclient.py" afterPath="$PROJECT_DIR$/ppsdk/core/pphttpclient.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppsdk/openapi_client.py" afterPath="$PROJECT_DIR$/ppsdk/openapi_client.py" />
-    </list>
+    <list default="true" id="eae192b4-9e9e-456d-8a16-0f7024386559" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -491,7 +484,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.4970545" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22788204" sideWeight="0.5029455" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22788204" sideWeight="0.4970545" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22788204" sideWeight="0.4970545" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.4970545" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.4970545" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
