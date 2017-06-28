@@ -34,6 +34,8 @@ class balance_checker:
         with open('balance', 'r') as f:
             self.balance = float(f.read())
             print('init balance %f' % self.balance)
+        with open('accesstoken', 'r') as f:
+            self.access_token = f.read()
         pass
 
     def get_authorize_code(self):
@@ -42,7 +44,6 @@ class balance_checker:
         authorize_url2 = 'https://ac.ppdai.com/oauth2/login?AppID=' + self.appid2 + '&ReturnUrl=' + self.returnUrl2
         print(authorize_url2)
 
-    access_token = '86f933f2-1e7b-45ed-a336-9ac3c41e1f92'
     RefreshToken = "e3a0ca1e-b10c-448a-be46-0206b6ee870f"
     openID = '01a1a1337577473cb9c1650f79f31728'
     # authorize_data: {"OpenID": "01a1a1337577473cb9c1650f79f31728",
@@ -56,7 +57,11 @@ class balance_checker:
 
     def refreshToken(self):
         new_token_info = self.client.refresh_token(self.APPID, self.openID, self.RefreshToken)
-        print(new_token_info.content)
+        token = new_token_info.json()['AccessToken']
+        print('got new token ', token)
+        self.access_token = token
+        with open('accesstoken', 'w') as f:
+            f.write(str(self.access_token))
 
 
     def _checkBalance(self):
@@ -66,7 +71,8 @@ class balance_checker:
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
         r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token)
         dic = r.json()
-        if dic['ResultMessage']:
+        print(dic)
+        if 'HttpStatus' in dic:
             self.refreshToken()
             self.checkBalance()
         if dic['Result'] == 0:
