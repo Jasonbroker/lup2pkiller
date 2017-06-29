@@ -129,18 +129,15 @@ class PPParser:
     返回需要继续取得详情的列表
     '''
     @staticmethod
-    def parse_bid_list(xml_string, strategy):
+    def parse_bid_list(json, strategy):
 
-        dom = xml.dom.minidom.parseString(xml_string)
-        root = dom.documentElement
-
-        loan_infos = root.getElementsByTagName("LoanInfos")[0]
-
+        loan_infos = json["LoanInfos"]
+        # 用来筛选的
         filteredElements = []
-        for element in loan_infos.childNodes:
-            CreditCode = element.getElementsByTagName('CreditCode')[0].childNodes[0].nodeValue
-            if CreditCode > strategy.credit:
-                PPParser.debug_print('low credit: ' + CreditCode)
+        for element in loan_infos:
+            creditCode = element['CreditCode']
+            if creditCode > strategy.credit:
+                PPParser.debug_print('low credit: ' + creditCode)
                 continue
             # 借款数
             amount = element.getElementsByTagName('Amount')[0].childNodes[0].nodeValue
@@ -156,4 +153,19 @@ class PPParser:
             listingId = element.getElementsByTagName('ListingId')[0].childNodes[0].nodeValue
             filteredElements.append(listingId)
         print('ratial = ', len(filteredElements), len(loan_infos.childNodes))
+        return filteredElements
+
+
+    @staticmethod
+    def parse_AA_bid_list(json):
+
+        loan_infos = json["LoanInfos"]
+        # 用来筛选的
+        filteredElements = []
+        for element in loan_infos:
+            creditCode = element['CreditCode']
+            if creditCode != 'AA':
+                continue
+            listingId = element['ListingId']
+            filteredElements.append(listingId)
         return filteredElements

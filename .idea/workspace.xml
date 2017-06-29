@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eae192b4-9e9e-456d-8a16-0f7024386559" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/balance" afterPath="$PROJECT_DIR$/ppdab/balance" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/balance_checker.py" afterPath="$PROJECT_DIR$/ppdab/balance_checker.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/ppdkiller.py" afterPath="$PROJECT_DIR$/ppdab/ppdkiller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/ppparser.py" afterPath="$PROJECT_DIR$/ppdab/ppparser.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppdab/strategy.py" afterPath="$PROJECT_DIR$/ppdab/strategy.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,18 +21,18 @@
       <file leaf-file-name="ppparser.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ppdab/ppparser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2380">
-              <caret line="140" column="94" lean-forward="false" selection-start-line="140" selection-start-column="71" selection-end-line="140" selection-end-column="94" />
+            <state relative-caret-position="270">
+              <caret line="161" column="38" lean-forward="false" selection-start-line="161" selection-start-column="21" selection-end-line="161" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ppdkiller.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ppdkiller.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ppdab/ppdkiller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1139">
-              <caret line="74" column="18" lean-forward="false" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
+            <state relative-caret-position="346">
+              <caret line="86" column="25" lean-forward="false" selection-start-line="86" selection-start-column="25" selection-end-line="86" selection-end-column="25" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -38,11 +40,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="balance_checker.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="strategy.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ppdab/strategy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-390">
+              <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="balance_checker.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ppdab/balance_checker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="77" column="46" lean-forward="false" selection-start-line="77" selection-start-column="46" selection-end-line="77" selection-end-column="46" />
+            <state relative-caret-position="260">
+              <caret line="74" column="31" lean-forward="true" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -134,11 +146,8 @@
         <option value="$PROJECT_DIR$/ppdab/detail_xml" />
         <option value="$PROJECT_DIR$/ppdab/ppsdk/detail.xml" />
         <option value="$PROJECT_DIR$/ppdab/detail.xml" />
-        <option value="$PROJECT_DIR$/ppdab/ppparser.py" />
-        <option value="$PROJECT_DIR$/ppdab/strategy.py" />
         <option value="$PROJECT_DIR$/ppdab/ppsdk/core/rsa_client.py" />
         <option value="$PROJECT_DIR$/ppdab/__init__py.py" />
-        <option value="$PROJECT_DIR$/ppdab/ppdkiller.py" />
         <option value="$PROJECT_DIR$/ppdab/balance" />
         <option value="$PROJECT_DIR$/ppsdk/openapi_client.py" />
         <option value="$PROJECT_DIR$/ppsdk/core/pphttpclient.py" />
@@ -146,6 +155,9 @@
         <option value="$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py" />
         <option value="$PROJECT_DIR$/ppdab/accesstoken" />
         <option value="$PROJECT_DIR$/ppdab/balance_checker.py" />
+        <option value="$PROJECT_DIR$/ppdab/strategy.py" />
+        <option value="$PROJECT_DIR$/ppdab/ppparser.py" />
+        <option value="$PROJECT_DIR$/ppdab/ppdkiller.py" />
       </list>
     </option>
   </component>
@@ -285,7 +297,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.balance_checker">
+  <component name="RunManager" selected="Python.ppdkiller">
     <configuration default="false" name="ppdkiller" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -446,8 +458,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.balance_checker" />
-        <item index="1" class="java.lang.String" itemvalue="Python.ppdkiller" />
+        <item index="0" class="java.lang.String" itemvalue="Python.ppdkiller" />
+        <item index="1" class="java.lang.String" itemvalue="Python.balance_checker" />
         <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for ppdab.ppdkiller.test_parse" />
         <item index="3" class="java.lang.String" itemvalue="Python.lu" />
         <item index="4" class="java.lang.String" itemvalue="Python.rsa_client" />
@@ -483,12 +495,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="17" y="23" width="1400" height="838" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15243004" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.4970545" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22788204" sideWeight="0.5029455" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22788204" sideWeight="0.4970545" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22788204" sideWeight="0.4970545" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.4970545" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.4970545" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -744,17 +755,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/strategy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-196">
-          <caret line="120" column="22" lean-forward="false" selection-start-line="120" selection-start-column="22" selection-end-line="120" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ppdab/ppsdk/core/rsa_client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -815,43 +820,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/ppparser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2380">
-          <caret line="140" column="94" lean-forward="false" selection-start-line="140" selection-start-column="71" selection-end-line="140" selection-end-column="94" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/ppdkiller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1139">
-          <caret line="74" column="18" lean-forward="false" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/datetime.pyi">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
           <caret line="190" column="8" lean-forward="false" selection-start-line="190" selection-start-column="8" selection-end-line="190" selection-end-column="8" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/ppsdk/core/pphttpclient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="24" column="8" lean-forward="false" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53">
-          <caret line="43" column="11" lean-forward="false" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -879,12 +852,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ppdab/ppsdk/core/pphttpclient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="24" column="8" lean-forward="false" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ppdab/ppsdk/openapi_client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="86" column="38" lean-forward="true" selection-start-line="86" selection-start-column="38" selection-end-line="86" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ppdab/ppparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="161" column="38" lean-forward="false" selection-start-line="161" selection-start-column="21" selection-end-line="161" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ppdab/strategy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-390">
+          <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ppdab/balance_checker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="77" column="46" lean-forward="false" selection-start-line="77" selection-start-column="46" selection-end-line="77" selection-end-column="46" />
+        <state relative-caret-position="260">
+          <caret line="74" column="31" lean-forward="true" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ppdab/ppdkiller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="86" column="25" lean-forward="false" selection-start-line="86" selection-start-column="25" selection-end-line="86" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
           </folding>
         </state>
       </provider>

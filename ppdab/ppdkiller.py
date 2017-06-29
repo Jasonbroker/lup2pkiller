@@ -42,16 +42,17 @@ class auto_bit_killer:
     RefreshToken = "e3a0ca1e-b10c-448a-be46-0206b6ee870f"
 
     # 获取散标列表
-    def bid_list(self):
+    def bid_list(self, index):
         url = 'http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList'
-        data = {'PageIndex': 1}
+        data = {'PageIndex': index}
 
         # data = {"timestamp":utctime.strftime('%Y-%m-%d %H:%M:%S')}#time.strftime('%Y-%m-%d %H:%M:%S',)
         # data = { "AccountName": "15200000001"}
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
-        xmldata = self.client.send(url=url, data=data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
-        return xmldata
+        client = ppdab.ppsdk.openapi_client.openapi_client(self.APPSECRET)
+        r = client.send(url=url, data=data, appid=self.APPID, sign=sign, accesstoken=self.access_token)
+        return r.json()
 
     '''detail bids'''
     def batch_bid_detail(self, listing_ids):
@@ -70,9 +71,23 @@ if __name__ == '__main__':
     # transfer.checkBalance()
     # transfer.get_authorize_code()
     # transfer.authorize()
+    index = 1
+    while True:
+        json_list = transfer.bid_list(index)
+        raw_filtered_Ids = PPParser.parse_AA_bid_list(json_list)
+        if len(raw_filtered_Ids) != 0:
+            print('卧槽终于有了！！', raw_filtered_Ids)
+            print(len(raw_filtered_Ids))
+            continue
+        else:
+            print('没有，继续搞吧')
+            print('final got ', len(json_list["LoanInfos"]))
+            index += 1
+            if len(json_list["LoanInfos"]) == 0 or index > 20:
+                index = 1
 
-    xml_list = transfer.bid_list()
-    print(xml_list)
+    strategy = Strategy(Strategy.STRATEGY_SAFE_AA)
+
     # strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
     # raw_filtered_Ids = PPParser.parse_bid_list(xml_list, strategy)
     #
