@@ -71,11 +71,13 @@ if __name__ == '__main__':
     # transfer.checkBalance()
     # transfer.get_authorize_code()
     # transfer.authorize()
+    all_ids = set()
     index = 1
     while True:
         json_list = transfer.bid_list(index)
         raw_filtered_Ids = PPParser.parse_AA_bid_list(json_list)
         if len(raw_filtered_Ids) != 0:
+            # all_ids
             print('卧槽终于有了！！', raw_filtered_Ids)
             print(len(raw_filtered_Ids))
             continue
