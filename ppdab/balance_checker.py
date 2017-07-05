@@ -170,7 +170,8 @@ class balance_checker:
             "alias": "zz",
             "requestid": str(time.time()*1000)
         }
-        noti_r = self.session.post(noti_url, data=json.dumps(noti_data), headers=noti_header)
+        session = requests.session()
+        noti_r = session.post(noti_url, data=json.dumps(noti_data), headers=noti_header)
         dic = noti_r.json()
         print(dic)
 
