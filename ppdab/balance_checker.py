@@ -184,7 +184,7 @@ if __name__ == '__main__':
     # transfer.refreshToken()
     transfer.checkBalance()
     while True:
-        # 十分钟一检查
+        # 5分钟一检查
         schedule.enter(60*5, 0, transfer.checkBalance)
         schedule.run()
 
