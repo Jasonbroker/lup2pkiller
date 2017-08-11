@@ -44,14 +44,14 @@ class balance_checker:
         authorize_url2 = 'https://ac.ppdai.com/oauth2/login?AppID=' + self.appid2 + '&ReturnUrl=' + self.returnUrl2
         print(authorize_url2)
 
-    RefreshToken = "e3a0ca1e-b10c-448a-be46-0206b6ee870f"
+    RefreshToken = "9f91feba-50ee-49ee-ba41-e9bd36c2fc81"
     openID = '01a1a1337577473cb9c1650f79f31728'
     # authorize_data: {"OpenID": "01a1a1337577473cb9c1650f79f31728",
     #                  "AccessToken": "48f6ec50-2917-4ab0-8d97-6c0d76917af9",
     #                  "RefreshToken": "b8471d4e-3a5a-492c-b678-e638715ce536", "ExpiresIn": 604800}
 
     def authorize(self):
-        code = 'cb5857ce8b674070a30503ba7feb816a'
+        code = '82930cba2f8548ca8a4da615458322f2'
         authorizeStr = self.client.authorize(appid=self.APPID, code=code)
         print(authorizeStr)
 
@@ -179,14 +179,16 @@ class balance_checker:
 if __name__ == '__main__':
     schedule = sched.scheduler(time.time, time.sleep)
     transfer = balance_checker()
-    # transfer.get_authorize_code()
-    # transfer.authorize()
-    # transfer.refreshToken()
+    #transfer.get_authorize_code()
+    #transfer.authorize()
+    #transfer.refreshToken()
+
     transfer.checkBalance()
     while True:
         # 5分钟一检查
         schedule.enter(60*5, 0, transfer.checkBalance)
         schedule.run()
+
 
 
 
