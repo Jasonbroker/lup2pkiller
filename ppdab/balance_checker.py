@@ -72,9 +72,10 @@ class balance_checker:
         r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token)
         dic = r.json()
         print(dic)
-        if 'HttpStatus' in dic:
-            self.refreshToken()
-            self.checkBalance()
+        if 'HttpStatus' in dic or 'Code' in dic:
+            if dic['Code'] == 'GTW-BRQ-INVALIDTOKEN':
+                self.refreshToken()
+                self.checkBalance()
         if dic['Result'] == 0:
             balance = float(dic['Balance'][2]['Balance'])
             earn = balance - self.balance
