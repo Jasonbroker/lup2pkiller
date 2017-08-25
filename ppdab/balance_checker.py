@@ -178,17 +178,12 @@ class balance_checker:
 
 
 if __name__ == '__main__':
-    schedule = sched.scheduler(time.time, time.sleep)
     transfer = balance_checker()
     #transfer.get_authorize_code()
     #transfer.authorize()
     #transfer.refreshToken()
 
     transfer.checkBalance()
-    while True:
-        # 5分钟一检查
-        schedule.enter(60*5, 0, transfer.checkBalance)
-        schedule.run()
 
 
 
