@@ -23,18 +23,21 @@ class balance_checker:
     getuiappid = 'M94TY2pmnn8g8VIPEWO808'
     mastersecret = 'BfWtyenXl86AwlL75kafJ'
 
+    script_path = os.path.realpath(__file__)
+    script_dir = os.path.dirname(script_path)
+
 
     def __init__(self):
-        with open('./private.txt', 'r') as f:
+        with open('%s/private.txt' % balance_checker.script_dir, 'r') as f:
            self.APPSECRET = f.read()
         self.client = ppsdk.openapi_client.openapi_client(self.APPSECRET)
         self.session = requests.session()
         self.runtime = time.time()
         self.noti_token = ''
-        with open('balance', 'r') as f:
+        with open('%s/balance' % balance_checker.script_dir, 'r') as f:
             self.balance = float(f.read())
             print('init balance %f' % self.balance)
-        with open('accesstoken', 'r') as f:
+        with open('%s/accesstoken' % balance_checker.script_dir, 'r') as f:
             self.access_token = f.read()
         pass
 
@@ -60,7 +63,7 @@ class balance_checker:
         token = new_token_info.json()['AccessToken']
         print('got new token ', token)
         self.access_token = token
-        with open('accesstoken', 'w') as f:
+        with open('%s/accesstoken' % balance_checker.script_dir, 'w') as f:
             f.write(str(self.access_token))
 
 
@@ -71,7 +74,7 @@ class balance_checker:
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
         r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token)
         dic = r.json()
-        print(dic)
+        # print(dic)
         if 'HttpStatus' in dic or 'Code' in dic:
             if dic['Code'] == 'GTW-BRQ-INVALIDTOKEN':
                 self.refreshToken()
@@ -81,10 +84,10 @@ class balance_checker:
             earn = balance - self.balance
             if self.balance >= 0:
                 self.balance = balance
-            with open('balance', 'w') as f:
+            with open('%s/balance' % balance_checker.script_dir, 'w') as f:
                 f.write(str(self.balance))
                 utctime = datetime.datetime.utcnow()
-                print('%s current balance %f' %(utctime.strftime('%Y-%m-%d %H:%M:%S'), self.balance))
+                print('%s current balance %f' % (utctime.strftime('%Y-%m-%d %H:%M:%S'), self.balance))
         else:
             earn = 0
         return earn
@@ -133,9 +136,8 @@ class balance_checker:
         # 需要重新找token
         if self.noti_token == '' or time.time() - self.runtime > 24 * 3600:
             self.noti_token = self.get_notification_token()
-            print('拍拍贷监控开始')
+            # print('拍拍贷监控开始')
             self.runtime = time.time()
-            self._send_notification('拍拍贷监控开始')
 
         if self.noti_token != '':
             self._send_notification(notification)
@@ -174,7 +176,7 @@ class balance_checker:
         session = requests.session()
         noti_r = session.post(noti_url, data=json.dumps(noti_data), headers=noti_header)
         dic = noti_r.json()
-        print(dic)
+        # print(dic)
 
 
 if __name__ == '__main__':
