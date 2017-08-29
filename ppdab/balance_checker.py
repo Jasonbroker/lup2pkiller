@@ -106,8 +106,8 @@ class balance_checker:
     def checkBalance(self):
         earn = transfer._checkBalance()
         if earn != 0:
-            msg = '余额更新%f，现余额%f' % (earn, self.balance)
-            os.system('terminal-notifier -title "拍拍贷" -message "%s"' % msg)
+            msg = '余额更新%.2f，现余额%.2f' % (earn, self.balance)
+            # os.system('terminal-notifier -title "拍拍贷" -message "%s"' % msg)
             transfer.send_notification(msg)
 
     def get_notification_token(self):
