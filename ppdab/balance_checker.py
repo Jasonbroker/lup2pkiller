@@ -74,12 +74,12 @@ class balance_checker:
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
         r = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token)
         dic = r.json()
-        # print(dic)
+        print(dic)
         if 'HttpStatus' in dic or 'Code' in dic:
             if dic['Code'] == 'GTW-BRQ-INVALIDTOKEN':
                 self.refreshToken()
                 self.checkBalance()
-        if dic['Result'] == 0:
+        if 'Result' in dic and dic['Result'] == 0:
             balance = float(dic['Balance'][2]['Balance'])
             earn = balance - self.balance
             if self.balance >= 0:
