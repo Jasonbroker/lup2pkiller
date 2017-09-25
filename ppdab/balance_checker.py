@@ -80,7 +80,11 @@ class balance_checker:
                 self.refreshToken()
                 self.checkBalance()
         if 'Result' in dic and dic['Result'] == 0:
-            balance = float(dic['Balance'][2]['Balance'])
+            balance = 0
+            for AccountCategory in dic['Balance']:
+                if AccountCategory['AccountCategory'] == '用户备付金.用户现金余额':
+                    balance = float(AccountCategory['Balance'])
+                    break
             earn = balance - self.balance
             if self.balance >= 0:
                 self.balance = balance
