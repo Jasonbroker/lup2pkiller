@@ -4,10 +4,11 @@ from ppdab.ppsdk.core import rsa_client
 import xml.dom.minidom
 from ppdab.strategy import Strategy
 from ppdab.ppparser import PPParser
+from ppdab.auto_bitter import auto_bitter
 
 import rsa
 # some consts for ppd
-
+import os
 
 
 class auto_bit_killer:
@@ -20,34 +21,27 @@ class auto_bit_killer:
     returnUrl = 'https://www.51talk.com'
 
     returnUrl2 = 'http://www.zhouzhengchang.com'
+    script_path = os.path.realpath(__file__)
+    script_dir = os.path.dirname(script_path)
 
     def __init__(self):
-        with open('./private.txt', 'r') as f:
+        with open('%s/private.txt' % auto_bit_killer.script_dir, 'r') as f:
            self.APPSECRET = f.read()
         self.client = ppdab.ppsdk.openapi_client.openapi_client(self.APPSECRET)
+        with open('%s/accesstoken' % auto_bit_killer.script_dir, 'r') as f:
+            self.access_token = f.read()
+
+        with open('%s/balance' % auto_bit_killer.script_dir, 'r') as f:
+            self.balance = float(f.read())
+            print('init balance %f' % self.balance)
+
+        self.auto_bitter = auto_bitter(self.APPSECRET, self.APPID, self.access_token)
         pass
-
-    def get_authorize_code(self):
-        authorize_url = 'https://ac.ppdai.com/oauth2/login?AppID=' + self.APPID + '&ReturnUrl=' + self.returnUrl
-        print(authorize_url)
-        authorize_url2 = 'https://ac.ppdai.com/oauth2/login?AppID=' + self.appid2 + '&ReturnUrl=' + self.returnUrl2
-        print(authorize_url2)
-
-    def authorize(self):
-        code = 'e3a5d899ffd04925a201c8d0823edff4'
-        authorizeStr = self.client.authorize(appid=self.APPID, code=code)
-        print(authorizeStr.decode())
-
-    access_token = '2135b713-c892-4d2c-8f7b-1c37dbef97a2'
-    RefreshToken = "e3a0ca1e-b10c-448a-be46-0206b6ee870f"
 
     # 获取散标列表
     def bid_list(self, index):
         url = 'http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList'
         data = {'PageIndex': index}
-
-        # data = {"timestamp":utctime.strftime('%Y-%m-%d %H:%M:%S')}#time.strftime('%Y-%m-%d %H:%M:%S',)
-        # data = { "AccountName": "15200000001"}
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
         client = ppdab.ppsdk.openapi_client.openapi_client(self.APPSECRET)
@@ -73,22 +67,42 @@ if __name__ == '__main__':
     # transfer.authorize()
     all_ids = set()
     index = 1
-    while True:
+    flag = True
+    while flag:
         json_list = transfer.bid_list(index)
-        raw_filtered_Ids = PPParser.parse_AA_bid_list(json_list)
-        if len(raw_filtered_Ids) != 0:
-            # all_ids
-            print('卧槽终于有了！！', raw_filtered_Ids)
-            print(len(raw_filtered_Ids))
-            continue
-        else:
-            print('没有，继续搞吧')
-            print('final got ', len(json_list["LoanInfos"]))
-            index += 1
-            if len(json_list["LoanInfos"]) == 0 or index > 20:
-                index = 1
+        # json_list = {'LoanInfos': [{'ListingId': 76750867, 'Title': '手机app用户的第1次闪电借款', 'CreditCode': 'AA', 'Amount': 14000.0, 'Rate': 12.0, 'Months': 12, 'PayWay': 0, 'RemainFunding': 50.0}, {'ListingId': 76750958, 'Title': '手机app用户的第1次闪电借款', 'CreditCode': 'AA', 'Amount': 5000.0, 'Rate': 12.0, 'Months': 12, 'PayWay': 0, 'RemainFunding': 5000.0}], 'Result': 1, 'ResultMessage': '查询成功', 'ResultCode': None}
+        # print(json_list)
+        level = 2
+        highest_ids, high_ids, raw_filtered_Ids = PPParser.parse_AA_bid_list(json_list, level)
 
-    strategy = Strategy(Strategy.STRATEGY_SAFE_AA)
+        if level == 1:
+            if len(highest_ids) != 0:
+                print('got highest bids', highest_ids)
+                for id in highest_ids:
+                    transfer.auto_bitter.bid(id, transfer.balance)
+        elif level == 2:
+            if len(high_ids) != 0:
+                print('got high bids', high_ids)
+                for id in high_ids:
+                    transfer.auto_bitter.bid(id, transfer.balance)
+        else:
+            if len(raw_filtered_Ids) != 0:
+                # all_ids
+                print('got ids', raw_filtered_Ids)
+                for id in raw_filtered_Ids:
+                    transfer.auto_bitter.bid(id, 198)
+                # 投完标已经比较耗时了，就不用往后找了
+                index = 1
+                continue
+        # if len(highest_ids) + len(high_ids) + len(raw_filtered_Ids) == 0:
+            # print('没有，继续搞吧')
+            # print('final got ', len(json_list["LoanInfos"]))
+        index += 1
+
+        if len(json_list["LoanInfos"]) == 0 or index > 2:
+            index = 1
+
+    # strategy = Strategy(Strategy.STRATEGY_SAFE_AA)
 
     # strategy = Strategy(Strategy.STRATEGY_BEST_GAIN_16)
     # raw_filtered_Ids = PPParser.parse_bid_list(xml_list, strategy)
@@ -108,6 +122,7 @@ if __name__ == '__main__':
     #
     # print('最终结果：\n')
     # print(final_ids)
+
 
 
 

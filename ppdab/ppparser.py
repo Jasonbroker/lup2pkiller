@@ -157,15 +157,56 @@ class PPParser:
 
 
     @staticmethod
-    def parse_AA_bid_list(json):
+    def parse_AA_bid_list(json, level):
 
         loan_infos = json["LoanInfos"]
         # 用来筛选的
         filteredElements = []
-        for element in loan_infos:
-            creditCode = element['CreditCode']
-            if creditCode != 'AA':
-                continue
-            listingId = element['ListingId']
-            filteredElements.append(listingId)
-        return filteredElements
+        filteredHigh = []
+        filteredHighest = []
+
+        if level == 1:
+            for element in loan_infos:
+                creditCode = element['CreditCode']
+                if creditCode != 'AA':
+                    continue
+                rate = element['Rate']
+                listingId = element['ListingId']
+                if rate >= 14:
+                    filteredHighest.append(listingId)
+        elif level == 2:
+            for element in loan_infos:
+                creditCode = element['CreditCode']
+                if creditCode != 'AA':
+                    continue
+                rate = element['Rate']
+                if rate < 12.5:
+                    continue
+                month = element['Months']
+
+                listingId = element['ListingId']
+                filteredHigh.append(listingId)
+        else:
+            for element in loan_infos:
+                creditCode = element['CreditCode']
+                if creditCode != 'AA':
+                    continue
+                rate = element['Rate']
+                if rate < 12:
+                    continue
+                month = element['Months']
+                if rate < 12.5 and month > 12:
+                    continue
+                listingId = element['ListingId']
+                if rate >= 14:
+                    filteredHighest.append(listingId)
+                elif rate == 12:
+                    filteredElements.append(listingId)
+                else:
+                    filteredHigh.append(listingId)
+
+        return filteredHighest, filteredHigh, filteredElements
+
+    @staticmethod
+    def parse_AA_12d5(json):
+        pass
