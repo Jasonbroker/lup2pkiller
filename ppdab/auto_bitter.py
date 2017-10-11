@@ -1,5 +1,5 @@
-from ppdab.ppsdk.core import rsa_client
-import ppdab
+from ppsdk.core import rsa_client
+import ppsdk.openapi_client
 
 class auto_bitter:
     def __init__(self, appsecret, appid, access_token):
@@ -13,7 +13,9 @@ class auto_bitter:
                 'Amount': amount}
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
-        client = ppdab.ppsdk.openapi_client.openapi_client(self.APPSECRET)
+        client = ppsdk.openapi_client.openapi_client(self.APPSECRET)
         r = client.send(url=url, data=data, appid=self.APPID, sign=sign, accesstoken=self.access_token)
-        print(r)
-        return r.json()
+        result_json = r.json()
+        print(result_json)
+        return result_json['Result']
+

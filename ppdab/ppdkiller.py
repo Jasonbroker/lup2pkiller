@@ -1,11 +1,11 @@
-import ppdab.ppsdk.openapi_client
+import ppsdk.openapi_client
 from requests.utils import quote
-from ppdab.ppsdk.core import rsa_client
+from ppsdk.core import rsa_client
 import xml.dom.minidom
-from ppdab.strategy import Strategy
-from ppdab.ppparser import PPParser
-from ppdab.auto_bitter import auto_bitter
-
+# from ppdab.strategy import Strategy
+from ppparser import PPParser
+from auto_bitter import auto_bitter
+import ppsdk.openapi_client
 import rsa
 # some consts for ppd
 import os
@@ -27,7 +27,7 @@ class auto_bit_killer:
     def __init__(self):
         with open('%s/private.txt' % auto_bit_killer.script_dir, 'r') as f:
            self.APPSECRET = f.read()
-        self.client = ppdab.ppsdk.openapi_client.openapi_client(self.APPSECRET)
+        self.client = ppsdk.openapi_client.openapi_client(self.APPSECRET)
         with open('%s/accesstoken' % auto_bit_killer.script_dir, 'r') as f:
             self.access_token = f.read()
 
@@ -44,7 +44,7 @@ class auto_bit_killer:
         data = {'PageIndex': index}
         sort_data = rsa_client.rsa_client.sort(data)
         sign = rsa_client.rsa_client.sign(sort_data, self.APPSECRET)
-        client = ppdab.ppsdk.openapi_client.openapi_client(self.APPSECRET)
+        client = ppsdk.openapi_client.openapi_client(self.APPSECRET)
         r = client.send(url=url, data=data, appid=self.APPID, sign=sign, accesstoken=self.access_token)
         return r.json()
 
@@ -60,6 +60,10 @@ class auto_bit_killer:
         list_result = self.client.send(url, data, appid=self.APPID, sign=sign, accesstoken=self.access_token).decode()
         return list_result
 
+    def getBalance(self):
+        with open('%s/balance' % auto_bit_killer.script_dir, 'r') as f:
+            self.balance = float(f.read())
+
 if __name__ == '__main__':
     transfer = auto_bit_killer()
     # transfer.checkBalance()
@@ -68,29 +72,42 @@ if __name__ == '__main__':
     all_ids = set()
     index = 1
     flag = True
+    last_id = 0
+    amount = 500
     while flag:
+        transfer.getBalance()
+        # amount = min(amount, int(transfer.balance))
+
         json_list = transfer.bid_list(index)
-        # json_list = {'LoanInfos': [{'ListingId': 76750867, 'Title': '手机app用户的第1次闪电借款', 'CreditCode': 'AA', 'Amount': 14000.0, 'Rate': 12.0, 'Months': 12, 'PayWay': 0, 'RemainFunding': 50.0}, {'ListingId': 76750958, 'Title': '手机app用户的第1次闪电借款', 'CreditCode': 'AA', 'Amount': 5000.0, 'Rate': 12.0, 'Months': 12, 'PayWay': 0, 'RemainFunding': 5000.0}], 'Result': 1, 'ResultMessage': '查询成功', 'ResultCode': None}
         # print(json_list)
-        level = 2
+        level = 3
         highest_ids, high_ids, raw_filtered_Ids = PPParser.parse_AA_bid_list(json_list, level)
 
         if level == 1:
             if len(highest_ids) != 0:
                 print('got highest bids', highest_ids)
                 for id in highest_ids:
-                    transfer.auto_bitter.bid(id, transfer.balance)
+                    if id == last_id:
+                        continue
+                    transfer.auto_bitter.bid(id, amount)
+                    last_id = id
         elif level == 2:
             if len(high_ids) != 0:
                 print('got high bids', high_ids)
                 for id in high_ids:
-                    transfer.auto_bitter.bid(id, transfer.balance)
+                    if id == last_id:
+                        continue
+                    transfer.auto_bitter.bid(id, amount)
+                    last_id = id
         else:
             if len(raw_filtered_Ids) != 0:
                 # all_ids
                 print('got ids', raw_filtered_Ids)
                 for id in raw_filtered_Ids:
-                    transfer.auto_bitter.bid(id, 198)
+                    if id == last_id:
+                        continue
+                    transfer.auto_bitter.bid(id, amount)
+                    last_id = id
                 # 投完标已经比较耗时了，就不用往后找了
                 index = 1
                 continue
