@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
         json_list = transfer.bid_list(index)
         # print(json_list)
-        level = 3
+        level = 2
         highest_ids, high_ids, raw_filtered_Ids = PPParser.parse_AA_bid_list(json_list, level)
 
         if level == 1:
@@ -114,10 +114,10 @@ if __name__ == '__main__':
         # if len(highest_ids) + len(high_ids) + len(raw_filtered_Ids) == 0:
             # print('没有，继续搞吧')
             # print('final got ', len(json_list["LoanInfos"]))
-        index += 1
+        # index += 1
 
-        if len(json_list["LoanInfos"]) == 0 or index > 2:
-            index = 1
+        #if len(json_list["LoanInfos"]) == 0 or index > 2:
+        #    index = 1
 
     # strategy = Strategy(Strategy.STRATEGY_SAFE_AA)
 
