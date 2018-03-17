@@ -47,14 +47,14 @@ class balance_checker:
         authorize_url2 = 'https://ac.ppdai.com/oauth2/login?AppID=' + self.appid2 + '&ReturnUrl=' + self.returnUrl2
         print(authorize_url2)
 
-    RefreshToken = "9f91feba-50ee-49ee-ba41-e9bd36c2fc81"
+    RefreshToken = "991110ac-2a7a-4d7b-94ba-9c2920cb3b96"
     openID = '01a1a1337577473cb9c1650f79f31728'
     # authorize_data: {"OpenID": "01a1a1337577473cb9c1650f79f31728",
     #                  "AccessToken": "48f6ec50-2917-4ab0-8d97-6c0d76917af9",
     #                  "RefreshToken": "b8471d4e-3a5a-492c-b678-e638715ce536", "ExpiresIn": 604800}
 
     def authorize(self):
-        code = '82930cba2f8548ca8a4da615458322f2'
+        code = '67403148e11e446ba70373d32ddc7160'
         authorizeStr = self.client.authorize(appid=self.APPID, code=code)
         print(authorizeStr)
 
@@ -159,6 +159,20 @@ class balance_checker:
                 "offline_expire_time": 1,
                 "msgtype": "transmission"
             },
+            # "notification": {
+            #     "style": {
+            #         "type": 0,
+            #         "text": "notification",
+            #         "title": "拍拍贷余额更新",
+            #         "is_ring": False,
+            #         "is_vibrate": False,
+            #         "is_clearable": True
+            #     },
+            #     "transmission_type": True,
+            #     "transmission_content": notification,
+            #     "duration_begin": "2017-03-22 11:40:00",
+            #     "duration_end": "2017-03-23 11:40:00"
+            # },
             "transmission": {
                 "transmission_type": False,
                 "transmission_content": "this is the transmission_content",
@@ -171,7 +185,7 @@ class balance_checker:
                         "title": "拍拍贷余额更新",
                         "body": notification
                     },
-                    'sound':'default',
+                    'content-available': 1,
                 },
             },
             "alias": "zz",
@@ -185,12 +199,11 @@ class balance_checker:
 
 if __name__ == '__main__':
     transfer = balance_checker()
-    #transfer.get_authorize_code()
-    #transfer.authorize()
-    #transfer.refreshToken()
+    # transfer.get_authorize_code()
+    # transfer.authorize()
+    # #transfer.refreshToken()
 
     transfer.checkBalance()
-
 
 
 

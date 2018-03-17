@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
         json_list = transfer.bid_list(index)
         # print(json_list)
-        level = 2
+        level = 3
         highest_ids, high_ids, raw_filtered_Ids = PPParser.parse_AA_bid_list(json_list, level)
 
         if level == 1:
