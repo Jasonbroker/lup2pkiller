@@ -1,6 +1,0 @@
-[{"domain": ".lu.com", "expiry": 1808194375, "httpOnly": 0, "name": "WT-FPC", "path": "/", "secure": 0, "value": "id=4.0.4.16-2868861312.30587678:lv=1492834375497:ss=1492834353995:fs=1492834353995:pn=1:vn=1"},
-{"domain": ".user.lu.com", "httpOnly": 0, "name": "Hm_lpvt_9842c7dcbbff3109ea37b7407dd0e95c", "path": "/", "secure": 0, "value": "1492834353"},
-{"domain": ".lu.com", "expiry": 1650514350.888413, "httpOnly": 0, "name": "_g2", "path": "/", "secure": 0, "value": "n_414676_93787ce3-ba03-4b79-b0c4-8ae3df3aec96"},
-{"domain": ".user.lu.com", "expiry": 1524370352, "httpOnly": 0, "name": "Hm_lvt_9842c7dcbbff3109ea37b7407dd0e95c", "path": "/", "secure": 0, "value": "1492834353"},
-{"domain": ".lu.com", "httpOnly": 1, "name": "IMVC", "path": "/", "secure": 0, "value": "91c6b89793d540d39888577d4ad077ac"},
-{"domain": ".lu.com", "expiry": 1650514350.887072, "httpOnly": 1, "name": "_g", "path": "/", "secure": 0, "value": "n_414676_94fb29e4-eddf-425b-bdca-d81c5a5fd5f6"}]
